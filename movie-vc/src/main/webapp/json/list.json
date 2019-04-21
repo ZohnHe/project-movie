@@ -1,0 +1,11 @@
+{
+  "code":"200",
+  "message": "请求成功",
+  "data": [{"movieName": "流浪地球","movieEnglishName": "The Wandering Earth","movieClassify1": "剧情","movieClassify2": "冒险",
+            "movieClassify3": "科幻","movieFeel": "3DIMAX","movieLength": "128分钟","movieDate": "上映时间2019-02-05",
+            "movieScore": "9.3","movieIntro": "太阳即将毁灭，人类在地球表面建造出巨大的推进器，寻找新家园。然而宇宙之路危机四伏，为了拯救地球，为了人类能在漫长的2500年后抵达新的家园，流浪地球时代的年轻人挺身而出，展开争分夺秒的生死之战。",
+            "moviePhoto": "/static/image/liulangdiqiu.jpg"},{"movieName": "流浪地球","movieEnglishName": "The Wandering Earth","movieClassify1": "剧情","movieClassify2": "冒险",
+    "movieClassify3": "科幻","movieFeel": "3DIMAX","movieLength": "128分钟","movieDate": "上映时间2019-02-05",
+    "movieScore": "9.3","movieIntro": "太阳即将毁灭，人类在地球表面建造出巨大的推进器，寻找新家园。然而宇宙之路危机四伏，为了拯救地球，为了人类能在漫长的2500年后抵达新的家园，流浪地球时代的年轻人挺身而出，展开争分夺秒的生死之战。",
+    "moviePhoto": "/static/image/liulangdiqiu.jpg"}]
+}

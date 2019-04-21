@@ -1,0 +1,260 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>详情</title>
+<link href="/static/css/seat.css" type="text/css" rel="stylesheet" />
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/js/layer-v3.0.3/layer/mobile/need/layer.css" rel="stylesheet" type="text/css" />
+<link href="/static/js/layer-v3.0.3/layer/mobile/need/layer.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/static/js/phone.js" ></script>
+<script type="text/javascript" src="/static/js/layer-v3.0.3/layer/mobile/layer.js"></script>
+</head>
+
+<body>
+<div class="whole">
+
+	<header class="header">
+        <a href="javascript:history.back(-1)" class="fa fa-angle-left"></a>
+        <span class="names" id="movieName">666</span>
+    </header>
+    
+    <div class="seat_head">
+    	<h3 id="cinema" id="cinema"></h3>
+        <span>
+        	<a id="time">今天07-06&nbsp;</a>
+           <!-- <a id="movieTime">19:00&nbsp;</a>-->
+            <a id="movieFeel">(国语 3D)&nbsp;</a>
+            <a>&nbsp;票价:&nbsp;</a>
+            <a id="price">40&nbsp;</a>
+        </span>
+    </div>
+    
+    <div class="seat_show">
+    	<ul>
+        	<li>
+            	<i></i>
+                <span>可选</span>
+            </li>
+            <li>
+            	<i></i>
+                <span>已售</span>
+            </li>
+            <li>
+            	<i></i>
+                <span>已选</span>
+            </li>
+            <li>
+            	<i></i>
+                <span>最佳区域</span>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="seat_choose">
+    	<div class="number" id="num"></div>
+    	<div class="seats" id="seats"></div>
+        
+    </div>
+    <div class="buttons" id="submit" onclick="f()">确认选择</div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $.get("/getSceneAndMovie" , function (mydata, status){
+            if(status=="success"){
+                var data=mydata.data;
+                $("#movieName").text(data.movieName);
+                $("#cinema").text(data.cinemaName);
+                $("#time").text(data.startTime);
+                $("#movieFeel").html("&nbsp;("+data.movieFeel+")");
+                $("#price").html(data.price+"&nbsp;");
+            }
+        });
+        $.get("/getNotEmptySeat" , function (data, status) {
+            if (status == "success") {
+                var list= data.data;
+                //debugger
+                /*$.each(list, function(i,val){
+                    alert(i);
+                    alert(val.seatid);
+                });*/
+            }
+            var html='';
+            html+='<ul class="touchs" id="touchs"><div class="screen">大厅屏幕</div>';
+            for(var i=1; i<=204; i++){
+                var selected='';
+                $.each(list, function(g,val){
+                    //alert(val.seatid);
+                    if(i==val.seatid){
+                        //alert(val.seatid);
+                        selected ='selected';
+                    }
+                });
+                //var selected = (i>91&&i<98 ? 'selected' : '');
+                html+='<li class="'+selected+'">';
+                html+='<input type="checkbox" name="seat-'+i+'" id="seat-'+i+'" />';
+                html+='<label for="seat-'+i+'"></label>';
+                html+='</li>';
+            }
+            html+='<div class="the_best"></div><div class="crossnum" id="crossnum"></div></ul>';
+            $('#seats').html(html);
+
+
+            $('.selected').children('input').attr({'disabled':'disabled','checked':'checked'});
+
+
+            $('.seats li input').on('click',function(){
+                var checkseat = $('.seats li').not('.selected').children('input:checked');
+                var checklen = checkseat.length;
+                console.log(checklen);
+                if(checklen>2){
+                    popu('最多只能选择两个座位');
+                    return false;
+                }
+            });
+        });
+
+        //公用弹出层
+        function popu(content){
+            layer.open({
+                content: content
+                ,skin: 'msg'
+                ,time: 3
+            });
+        }
+        var num='';
+        num+='<ul>';
+        for(var i=1; i<=12; i++){
+            num+='<li>'+i+'</li>';
+        }
+        html+='</ul>';
+        $('#num').html(num);
+        var crossnum='';
+        crossnum+='<ul>';
+        for(var j=1; j<=17; j++){
+            crossnum+='<li>'+j+'</li>';
+        }
+        html+='</ul>';
+        $('#crossnum').html(crossnum);
+
+
+
+    })
+
+
+
+</script>
+
+<!---拖拽js--->
+<script>
+$(function(){
+    var flag = false;
+    var cur = {
+        x:0,
+        y:0
+    }
+    var nx,ny,dx,dy,x,y ;
+    function down(){
+        flag = true;
+        var touch ;
+        if(event.touches){
+            touch = event.touches[0];
+        }else {
+            touch = event;
+        }
+        cur.x = touch.clientX;
+        cur.y = touch.clientY;
+        dx = div2.offsetLeft;
+        dy = div2.offsetTop;
+    }
+    function move(){
+        if(flag){
+            var touch ;
+            if(event.touches){
+                touch = event.touches[0];
+            }else {
+                touch = event;
+            }
+            nx = touch.clientX - cur.x;
+            ny = touch.clientY - cur.y;
+            x = dx+nx;
+            y = dy+ny;
+            div2.style.left = x+"px";
+            //div2.style.top = y +"px";
+
+			
+            //阻止页面的滑动默认事件
+            document.addEventListener("touchmove",function(){
+                //event.preventDefault();
+            },false);
+        }
+    }
+    //鼠标释放时候的函数
+    function end(){
+        flag = false;
+    }
+    var div2 = document.getElementById("touchs");
+    div2.addEventListener("mousedown",function(){
+        down();
+    },false);
+    div2.addEventListener("touchstart",function(){
+        down();
+    },false)
+    div2.addEventListener("mousemove",function(){
+        move();
+    },false);
+    div2.addEventListener("touchmove",function(){
+        move();
+    },false)
+    document.body.addEventListener("mouseup",function(){
+        end();
+    },false);
+    div2.addEventListener("touchend",function(){
+        end();
+    },false);
+	
+});
+
+    function f() {
+        //alert(666);
+        var param={};
+        var seat1;
+        var seat2;
+        var tt=$('.seats li').not('.selected').children("input:checkbox:checked");
+        //debugger;
+        seat1=tt[0].id;
+        if(tt.length>1){
+            seat2=tt[1].id;
+        }
+        //alert(seat1);
+
+        param.movieName=$("#movieName").text();
+        param.cinema=$("#cinema").text();
+        param.movieTime=$("#movieTime").text();
+        param.price=parseInt($("#price").text())*tt.length;
+        param.seat1=seat1;
+        param.seat2=seat2;
+        $.ajax({
+            type: "POST",
+            url: "/buyTicket",
+            contentType: "application/json; charset=utf-8",
+            cache: false,  //禁用缓存
+            data: JSON.stringify(param),  //传入组装的参数
+            dataType: "json",
+            success: function (result) {
+                //debugger;
+               // alert(result);
+                if(result.code=="200"){
+                    window.location.href="/static/pay2.html";
+                }
+            }
+
+        });
+    }
+</script>
+
+</body>
+</html>

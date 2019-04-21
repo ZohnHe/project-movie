@@ -1,0 +1,188 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <link rel="dns-prefetch" href="//s0.meituan.net">
+
+    <link rel="apple-touch-icon" href="https://s0.meituan.net/img/apple-touch-icon-ipad.png">
+    <link rel="shortcut icon" href="//p1.meituan.net/tuanpic/1e4d71577b7922f1ab756d202e1ac4af1342.ico">
+    <link rel="icon" href="//p1.meituan.net/tuanpic/1e4d71577b7922f1ab756d202e1ac4af1342.ico" sizes="16x16 32x32">
+
+    <link rel="alternate" href="http://www.meituan.com/feed" title="订阅更新" type="application/rss+xml">
+
+    <link rel="canonical" href="/account/unitivesignup?service&#x3D;maoyan&amp;continue&#x3D;https%3A%2F%2Fmaoyan.com%2Fpassport%2Flogin%3Fredirect%3D%252F">
+    <meta name="keywords" content="美团,登录,注册,美团登录,美团注册">
+
+    <title>注册 | 梦想影城</title>
+    <!--[if lt IE 9]>
+    <script src="//s0.meituan.net/bs/jsm/?f&#x3D;fe-sso-fs:build/page/vendor/html5shiv.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="//s0.meituan.net/bs/css/?f=fe-sso-fs:build/page/signup/index.5dec974.css">
+
+
+</head>
+
+<body class="pg-unitive-signup theme--maoyan">
+
+<header class="header--mini" style="height: 58px">
+    <div class="wrapper cf">
+        <a href="/static/index.html"><img src="../static/user/image/mengxiang.jpg" style="width: 150px;height: 48px"></a>
+    </div>
+</header>
+
+
+
+<div class="content">
+    <div class="J-unitive-signup-form">
+
+        <div class="sheet" style="display:block">
+            <form>
+                <div class="form-field form-field--mobile">
+                    <label>手机号</label>
+
+                    <input id="mobile" type="text" name="mobile" class="f-text "/>
+                     <span class="inline-tip"></span>
+
+                </div>
+                <div class="form-field form-field--vbtn">
+                    <label>图片验证码</label>
+
+
+                    <!--<div class="J-captcha captcha-wrapper" >
+                        <input type="text" id="captcha-mobile" class="f-text J-captcha" name="captcha-mobile" autocomplete="off" />
+                        <img id="signup-captcha-mobile-img" height="34px" width="60px" class="signup-captcha-img J-captcha-refresh" src="https://passport.meituan.com/account/captcha" />
+                        <a tabindex="-1" class="J-captcha-refresh captcha-refresh inline-link" href="javascript:void(0)">看不清楚？换一张</a>
+                    </div>-->
+
+
+                </div>
+
+                <div class="form-field form-field--pwd">
+                    <label>创建密码</label>
+
+                    <input id="password" type="password" name="password" class="f-text J-pwd"/>
+
+
+
+                </div>
+                <div class="form-field form-field--pwd2">
+                    <label>确认密码</label>
+
+                    <input id="password2" type="password" name="password2" class="f-text J-pwd2"/>
+
+
+
+                </div>
+                <div class="form-field">
+                    <input id="userRegister" type="button" name="commit" class="btn" value="同意以下协议并注册" />
+                    <a href="" target="_blank"></a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+    <div class="term">
+        <a class="f1" href="#" target="_blank">《用户协议》</a>
+    </div>
+</div>
+
+<footer class="footer--mini">
+    <p class="copyright">
+        <span class="f1">如有抄袭，请联系客服</span>
+    </p>
+</footer>
+
+<script>window.onunload = function(){};</script>
+
+<span id="csrf" style="display:none">CXKSAtMC-3evJj5nnohpcunCzMzKXltYtzqo</span>
+
+<!--<script src="//s0.meituan.net/bs/jsm/?f&#x3D;fe-sso-fs:build/page/vendor/jquery-1.11.3.min.js"></script>-->
+<!--<script src="//s0.meituan.net/bs/js/?f=fe-sso-fs:build/page/common.5dec974.js;fe-sso-fs:build/page/signup/index.5dec974.js"></script>-->
+<!-- jquery -->
+<script src="../static/user/js/jquery.min.js"></script>
+<!-- md5加密 -->
+<script src="../static/user/js/jquery.md5.js"></script>
+
+<script>
+    var Rohr_Opt = {
+        geo: false
+    }
+</script>
+<script src="//s0.meituan.net/mxx/y/default.js"></script>
+
+<script>
+    $(function () {
+
+        $("#password2").blur(function () {
+            if ($("#password").val() != $("#password2").val().trim()){
+                alert("两次密码不一样");
+            }
+        });
+        
+        $("#userRegister").click(function () {
+            var flag = false;
+            var phone = $("#mobile").val();
+
+            $.ajaxSettings.async = false;
+            $.get("/api/user/getPhone?phone=" + phone, function (data) {
+                if (data == "0"){
+                    flag = true;
+                }else {
+                    alert("手机号码已存在")
+                }
+            });
+            $.ajaxSettings.async = true;
+
+            if ($("#password").val() == $("#password2").val() && $("#password").val().trim() != "" && flag){
+
+                var salt = Math.random().toString(36).slice(-16);
+                var password = $("#password2").val();
+                password = $.md5(password);
+                password = $.md5(password+salt);
+
+                $.ajax({
+                    type : "POST",
+                    url : "/api/user/register",
+                    dataType : "json",
+                    contentType : "application/json;charset=UTF-8",
+                    data : JSON.stringify({
+                        "phone" : phone ,
+                        "password" : password,
+                        "salt" : salt}),
+                    success : function (data) {
+                        var json = data;
+                        //请求参数返回的全局响应，默认为200
+                        if (json.code == '200'){
+                            //登陆成功返回的响应，成功为1
+                            if (json.data == 1){
+                                window.location.href = "/static/login.html";
+                            }
+                            //登陆失败为0
+                            else if (json.data == 0){
+                                alert("注册失败");
+                            }
+                        }else {
+                            alert(json.msg);
+                        }
+                    },
+                    error : function () {
+                        alert("注册失败!")
+                    }
+                });
+            }
+        });
+    })
+</script>
+
+</body>
+</html>

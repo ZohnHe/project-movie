@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movie.dao.mapping.TbOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.movie.dao.pojo.TbOrder" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="creat_time" property="creatTime" jdbcType="DATE" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="movie_id" property="movieId" jdbcType="INTEGER" />
+    <result column="moviv_scene" property="movivScene" jdbcType="INTEGER" />
+    <result column="cinema_id" property="cinemaId" jdbcType="INTEGER" />
+    <result column="seat1" property="seat1" jdbcType="VARCHAR" />
+    <result column="seat2" property="seat2" jdbcType="VARCHAR" />
+    <result column="seat3" property="seat3" jdbcType="VARCHAR" />
+    <result column="seat4" property="seat4" jdbcType="VARCHAR" />
+    <result column="ticket_number" property="ticketNumber" jdbcType="VARCHAR" />
+    <result column="is_active" property="isActive" jdbcType="VARCHAR" />
+    <result column="is_pay" property="isPay" jdbcType="INTEGER" />
+    <result column="payment_method" property="paymentMethod" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, creat_time, user_id, movie_id, moviv_scene, cinema_id, seat1, seat2, seat3, seat4, 
+    seat5, seat6, is_pay, payment_method
+  </sql>
+  <select id="selectByIds" resultType="com.movie.dao.pojo.ChooseSeat">
+    SELECT
+	a.cinema_name,
+	b.movie_name,
+	c.viewing_time,
+	c.viewing_projection_start start_time,
+	c.viewing_price price,
+	b.movie_feel
+    FROM
+        m_cinema a,
+        m_details b,
+        m_time c
+    WHERE
+        a.id = #{cinemaId}
+    AND b.id = #{movieId}
+    AND c.id = #{scnenId}
+  </select>
+
+
+  <select id="selectOrderByOrderId" resultType="com.movie.dao.pojo.OrderResp" >
+    SELECT
+	a.movie_name,
+	d.viewing_projection_start time,
+	b.cinema_name,
+	d.viewing_hall,
+	c.seat1,
+	c.seat2,
+	c.pay_count
+    FROM
+        m_details a,
+        m_cinema b,
+        m_order c,
+        m_time d
+    WHERE
+        c.movie_id = a.id
+    AND c.cinema_id = b.id
+    AND c.is_pay = 0
+    AND c.moviv_scene = d.id
+    AND c.id = #{id}
+  </select>
+
+    <update id="unActive">
+        UPDATE m_order set is_active='0' where id=#{orderId}
+    </update>
+
+    <update id="toPay">
+        UPDATE m_order set is_pay='1' where id=#{orderId}
+    </update>
+
+    <update id="insertUUID">
+        UPDATE m_order set ticket_number=#{tbOrder.ticketNumber} where id=#{tbOrder.id}
+    </update>
+
+    <update id="deleteOrder">
+         UPDATE m_order set is_active=0 where id=#{id}
+    </update>
+
+</mapper>

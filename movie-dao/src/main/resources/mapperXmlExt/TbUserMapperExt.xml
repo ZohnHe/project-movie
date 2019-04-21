@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movie.dao.mapping.ext.TbUserMapperExt" >
+  <resultMap id="BaseResultMap" type="com.movie.dao.pojo.ext.TbUserExt"
+              extends="com.movie.dao.mapping.TbUserMapper.BaseResultMap">
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, username, password, phone, email, gender, birthday, life, trade, job, interest,
+    signature, salt, is_role
+  </sql>
+
+  <select id="selectUserByLogin" resultType="com.movie.dao.pojo.TbUser">
+    select * from m_user where username = #{username} and password = #{password}
+    UNION
+    select * from m_user where phone = #{username} and password = #{password}
+    UNION
+    select * from m_user where email = #{username} and password = #{password}
+  </select>
+
+  <select id="selectSalt" resultType="com.movie.dao.pojo.TbUser">
+      select * from m_user where username = #{username}
+       UNION
+       select * from m_user where phone = #{username}
+       UNION
+       select * from m_user where email = #{username}
+   </select>
+
+  <update id="updateUserById">
+    update m_user
+    set
+      username = #{tbUser.username},
+      gender = #{tbUser.gender},
+      birthday = #{tbUser.birthday},
+      life = #{tbUser.life},
+      trade = #{tbUser.trade},
+      job = #{tbUser.job},
+      interest = #{tbUser.interest},
+      signature = #{tbUser.signature}
+    where
+      id = #{tbUser.id}
+  </update>
+
+  <update id="updateUserImage">
+    update m_user
+    set
+      image = #{image}
+    where
+    id = #{userId}
+  </update>
+
+  <insert id="addUser">
+    insert into m_user(
+      username,
+      phone,
+      password,
+      salt
+    )
+    values(
+      #{tbUser.username},
+      #{tbUser.phone},
+      #{tbUser.password},
+      #{tbUser.salt}
+    )
+  </insert>
+
+  <select id="selectUserByPhone" resultType="java.lang.Integer">
+    select count(0) from m_user
+    where
+      phone = ${phone}
+  </select>
+
+  <select id="selectMyOrder" resultMap="BaseResultMap" resultType="com.movie.dao.pojo.ext.TbUserExt">
+    select u.*,date_format(o.creat_time,'%Y-%m-%d') creat_time,o.id orderId,o.seat1,o.seat2,o.seat3,
+      o.seat4,o.ticket_number,o.is_pay,o.pay_count,
+      d.movie_photo,d.movie_name,d.movie_date,
+      c.cinema_name,
+      t.viewing_hall,t.viewing_price
+    from m_user u
+    LEFT JOIN m_order o on u.id = #{id} and u.id = o.user_id and o.is_active = 1
+    LEFT JOIN m_details d on o.movie_id = d.id
+    LEFT JOIN m_cinema c on o.cinema_id = c.id
+    LEFT JOIN m_time t on o.moviv_scene = t.id;
+  </select>
+
+  <select id="selectUserById" resultMap="BaseResultMap">
+  select * from m_user
+  where id = #{id}
+</select>
+</mapper>

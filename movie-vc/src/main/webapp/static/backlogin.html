@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!--
+Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.7
+Version: 4.7.5
+Author: KeenThemes
+Website: http://www.keenthemes.com/
+Contact: support@keenthemes.com
+Follow: www.twitter.com/keenthemes
+Dribbble: www.dribbble.com/keenthemes
+Like: www.facebook.com/keenthemes
+Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+Renew Support: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
+-->
+<!--[if IE 8]>
+<html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="zh-CN" class="translated-ltr">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+<head>
+    <meta charset="utf-8"/>
+    <title>后台管理登录</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="Preview page of Metronic Admin Theme #4 for " name="description"/>
+    <meta content="" name="author"/>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
+          type="text/css"/>
+    <link href="/static/metronic/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/metronic/css/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/metronic/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/metronic/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="/static/metronic/css/select2.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/metronic/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="/static/metronic/css/components.min.css" rel="stylesheet" id="style_components" type="text/css"/>
+    <link href="/static/metronic/css/plugins.min.css" rel="stylesheet" type="text/css"/>
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="/static/metronic/css/login-2.min.css" rel="stylesheet" type="text/css"/>
+    <!-- END PAGE LEVEL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <!-- END THEME LAYOUT STYLES -->
+
+    <!--<link rel="shortcut icon" href="favicon.ico" />-->
+</head>
+<!-- END HEAD -->
+
+<body class=" login">
+<!-- BEGIN LOGIN -->
+<div class="content" style="margin-top: 15%">
+
+    <div class="form-title">
+        <span class="form-title">后台管理系统&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请登录</span>
+    </div>
+
+    <div class="form-group">
+        <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+        <span id="msg">
+                <div class="alert alert-danger">账户不存在 or 密码错误</div>
+            </span>
+        <label class="control-label visible-ie8 visible-ie9">用户名</label>
+        <input id="username" class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off"
+               placeholder="Username" name="username"/></div>
+    <div class="form-group">
+        <label class="control-label visible-ie8 visible-ie9">密码</label>
+        <input id="password" class="form-control form-control-solid placeholder-no-fix" type="password"
+               autocomplete="off"
+               placeholder="Password" name="password"/></div>
+    <div class="form-actions">
+        <button type="button" id="signin" class="btn red btn-block uppercase">登录</button>
+    </div>
+</div>
+
+<!--[if lt IE 9]>
+<script src="/static/metronic/js/respond.min.js"></script>
+<script src="/static/metronic/js/excanvas.min.js"></script>
+<script src="/static/metronic/js/ie8.fix.min.js"></script>
+<![endif]-->
+<!-- BEGIN CORE PLUGINS -->
+<script src="/static/metronic/js/jquery.min.js" type="text/javascript"></script>
+<script src="/static/metronic/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/static/metronic/js/js.cookie.min.js" type="text/javascript"></script>
+<script src="/static/metronic/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="/static/metronic/js/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="/static/metronic/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="/static/metronic/js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="/static/metronic/js/additional-methods.min.js" type="text/javascript"></script>
+<script src="/static/metronic/js/select2.full.min.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN THEME GLOBAL SCRIPTS -->
+<script src="/static/metronic/js/app.min.js" type="text/javascript"></script>
+<!-- END THEME GLOBAL SCRIPTS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="/static/metronic/js/login.min.js" type="text/javascript"></script>
+
+</body>
+
+ext/javascript">
+    $(document).ready(function () {
+        $("#msg").hide();
+
+        $("#signin").click(function () {
+            var username = $("#username").val();
+            var password = $("#password").val();
+
+            /*将用户名，密码传入后台*/
+            $.ajax({
+                type: "POST",
+                url: "/api/admin/login",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({
+                    "username": username,
+                    "password": password
+                }),
+                dataType: "json",
+                success: function (data) {
+                    /*数据库中存在这个账户*/
+                    $("#msg").hide();
+                    window.location.href = "./back.html";
+                },
+                error:function () {
+                    $("#msg").show();
+                }
+            });
+        })
+    })
+</script>
+
+</html>

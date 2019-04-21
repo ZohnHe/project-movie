@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movie.dao.mapping.TbCinemaMapper" >
+  <resultMap id="BaseResultMap" type="com.movie.dao.pojo.TbCinema" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cinema_name" property="cinemaName" jdbcType="VARCHAR" />
+    <result column="cinema_address" property="cinemaAddress" jdbcType="VARCHAR" />
+    <result column="cinema_phone" property="cinemaPhone" jdbcType="VARCHAR" />
+    <result column="cinema_glasses" property="cinemaGlasses" jdbcType="VARCHAR" />
+    <result column="cinema_preferences" property="cinemaPreferences" jdbcType="VARCHAR" />
+    <result column="cinema_parking" property="cinemaParking" jdbcType="VARCHAR" />
+    <result column="cinema_price" property="cinemaPrice" jdbcType="INTEGER" />
+    <result column="cinema_img" property="cinemaImg" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, cinema_name, cinema_address, cinema_phone, cinema_glasses, cinema_preferences, 
+    cinema_parking, cinema_price, cinema_img, flag
+  </sql>
+  <select id="selectAllCinema" resultType="com.movie.dao.pojo.ext.TbCinemaExt">
+    SELECT DISTINCT
+	c.*, b.movie_name
+    FROM
+        m_time a,
+        m_details b,
+        m_cinema c
+    WHERE
+        a.movie_id = b.id
+    AND a.parent_id = c.id
+    AND b.id = #{movie_id}
+  </select>
+</mapper>

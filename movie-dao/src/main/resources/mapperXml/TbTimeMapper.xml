@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movie.dao.mapping.TbTimeMapper" >
+  <resultMap id="BaseResultMap" type="com.movie.dao.pojo.TbTime" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="viewing_projection_start" property="viewingProjectionStart" jdbcType="TIMESTAMP" />
+    <result column="viewing_projection_end" property="viewingProjectionEnd" jdbcType="TIMESTAMP" />
+    <result column="viewing_language" property="viewingLanguage" jdbcType="VARCHAR" />
+    <result column="viewing_hall" property="viewingHall" jdbcType="VARCHAR" />
+    <result column="viewing_price" property="viewingPrice" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, parent_id, viewing_projection_start, viewing_projection_end, viewing_language, 
+    viewing_hall, viewing_price , viewing_time , movie_id
+  </sql>
+
+  <select id="selectAllById" resultType="com.movie.dao.pojo.TbTime">
+    select * from m_time where parent_id = #{parent_id};
+  </select>
+
+  <select id="selectById" resultType="com.movie.dao.pojo.TbTime">
+    SELECT DISTINCT
+	a.*
+    FROM
+        m_time a,
+        m_details b,
+        m_cinema c
+    WHERE
+        a.movie_id = #{movie_id}
+    AND a.parent_id = #{parent_id}
+  </select>
+</mapper>

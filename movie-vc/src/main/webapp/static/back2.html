@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js"> <![endif]-->
+
+<html lang="zh-CN" class="translated-ltr">
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8"/>
+    <title>后台管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="Preview page of Metronic Admin Theme #2 for editable datatable samples" name="description"/>
+    <meta content="" name="author"/>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
+          type="text/css"/>
+    <link href="/static/metronic/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/metronic/css/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/metronic/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/metronic/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/metronic/css/datatables.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/metronic/css/datatables.bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/metronic/css/components.min.css" rel="stylesheet" id="style_components" type="text/css"/>
+    <link href="/static/metronic/css/plugins.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/metronic/css/layout.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/metronic/css/blue.min.css" rel="stylesheet" type="text/css" id="style_color"/>
+    <link href="/static/metronic/css/custom.min.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
+
+<!-- BEGIN CONTAINER -->
+<div class="page-container" style="margin-top: 15px;margin-right: 15px">
+    <!-- BEGIN SIDEBAR -->
+    <div class="page-sidebar-wrapper">
+        <div class="page-sidebar navbar-collapse collapse">
+            <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false"
+                data-auto-scroll="true" data-slide-speed="200">
+                <li id="a_form" class="nav-item start ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">电影院</span>
+                        <span class="arrow"></span>
+                    </a>
+                </li>
+                <li id="b_form" class="nav-item  ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">电影</span>
+                        <span class="arrow"></span>
+                    </a>
+                </li>
+                <li id="c_form" class="nav-item  ">
+                    <a href="javascript:;" class="nav-link nav-toggle">
+                        <span class="title">场次</span>
+                        <span class="arrow"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <h1 class="page-title">后 台 数 据 管 理
+            </h1>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet light portlet-fit ">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <span id="form" class="caption-subject font-red sbold uppercase">影院</span>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="table-toolbar">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="btn-group">
+                                            <button id="add" class="btn green" data-toggle="modal" href="#cinema_modal">
+                                                添加数据
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="float: right">
+                               搜索: <input type="text" /></div>
+                            </div>
+                            <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+                                <thead>
+                                <tr id="table_header">
+                                    <th id="th_0" class="nosort">ID</th>
+                                    <th id="th_1" class="nosort">影院名字</th>
+                                    <th id="th_2" class="nosort">影院地址</th>
+                                    <th id="th_3" class="nosort">影院联系方式</th>
+                                    <th id="th_4" class="nosort">眼镜价钱</th>
+                                    <th id="th_5" class="nosort">儿童免票</th>
+                                    <th id="th_6" class="nosort">停车场</th>
+                                    <th id="th_7" class="nosort">价钱(起)</th>
+                                    <th class="nosort">删除</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tr_1">
+                                </tbody>
+                                <!--<ul class="pagination" style="float: right" id="pagingUl">
+                                    <li><a href="#">&laquo;</a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">&raquo;</a></li>
+                                </ul>-->
+                            </table>
+                        </div>
+                        <button id="b1" type="button" class="btn btn-info">首页</button>
+                        <button id="b2" type="button" class="btn btn-info">上一页</button>
+                        <button id="b3" type="button" class="btn btn-info">下一页</button>
+                        <button id="b4" type="button" class="btn btn-info">尾页</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 影院  模态框（Modal） -->
+<div class="modal fade" id="cinema_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">新增</h4>
+            </div>
+            <div class="modal-body">
+                <form id="goodsFrm_cinema">
+                    <div class="form-group has-feedback">
+                        <input id="cinemaName" name="cinemaName" type="input" class="form-control" placeholder="影院名字">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="cinemaAddress" name="cinemaAddress" type="input" class="form-control"
+                               placeholder="影院地址">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="cinemaPhone" name="cinemaPhone" type="input" class="form-control"
+                               placeholder="影院联系方式">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="cinemaGlasses" name="cinemaGlasses" type="input" class="form-control"
+                               placeholder="眼镜价钱">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="cinemaPreferences" name="cinemaPreferences" type="input" class="form-control"
+                               placeholder="儿童免票">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="cinemaParking" name="cinemaParking" type="input" class="form-control"
+                               placeholder="停车场">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="cinemaPrice" name="cinemaPrice" type="input" class="form-control" placeholder="价钱">
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="add_sub_1">提交</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 电影  模态框（Modal） -->
+<div class="modal fade" id="movie_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">新增</h4>
+            </div>
+            <div class="modal-body">
+                <form id="goodsFrm_movie">
+                    <div class="form-group has-feedback">
+                        <input id="movieName" name="movieName" type="input" class="form-control" placeholder="电影中文名字">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="movieEnglistName" name="movieEnglistName" type="input" class="form-control"
+                               placeholder="电影英文名字">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="movieClassify1" name="movieClassify1" type="input" class="form-control"
+                               placeholder="电影分类1">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="movieClassify2" name="movieClassify2" type="input" class="form-control"
+                               placeholder="电影分类2">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="movieClassify3" name="movieClassify3" type="input" class="form-control"
+                               placeholder="电影分类3">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="movieFeel" name="movieFeel" type="input" class="form-control"
+                               placeholder="屏幕类别">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="movieLength" name="movieLength" type="input" class="form-control"
+                               placeholder="电影时长">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="movieDate" name="movieDate" type="input" class="form-control"
+                               placeholder="电影上映时间">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="movieScore" name="movieScore" type="input" class="form-control"
+                               placeholder="电影评分">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="add_sub_2">提交</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 座次  模态框（Modal） -->
+<div class="modal fade" id="scene_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">新增</h4>
+            </div>
+            <div class="modal-body">
+                <form id="goodsFrm_scene">
+                    <div class="form-group has-feedback">
+                        <input id="cinemaName_scene" name="cinemaName_scene" type="input" class="form-control"
+                               placeholder="影院">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="movieName_scene" name="movieName_scene" type="input" class="form-control"
+                               placeholder="电影">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="viewingProjectionStart" name="viewingProjectionStart" type="input"
+                               class="form-control"
+                               placeholder="开场时间">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="viewingProjectionEnd" name="viewingProjectionEnd" type="input" class="form-control"
+                               placeholder="结束时间">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="viewingLanguage" name="viewingLanguage" type="input" class="form-control"
+                               placeholder="语言">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="viewingHall" name="viewingHall" type="input" class="form-control"
+                               placeholder="几号厅">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input id="viewingPrice" name="viewingPrice" type="input" class="form-control"
+                               placeholder="价钱">
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="add_sub_3">提交</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+<script src="/static/metronic/js/respond.min.js"></script>
+<script src="/static/metronic/js/excanvas.min.js"></script>
+<script src="/static/metronic/js/ie8.fix.min.js"></script>
+<script src="/static/metronic/js/jquery.min.js" type="text/javascript"></script>
+<script src="/static/metronic/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/static/metronic/js/js.cookie.min.js" type="text/javascript"></script>
+<script src="/static/metronic/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="/static/metronic/js/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="/static/metronic/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<script src="/static/metronic/js/datatable.js" type="text/javascript"></script>
+<script src="/static/metronic/js/datatables.min.js" type="text/javascript"></script>
+<script src="/static/metronic/js/datatables.bootstrap.js" type="text/javascript"></script>
+<script src="/static/metronic/js/app.min.js" type="text/javascript"></script>
+<script src="/static/metronic/js/table-datatables-editable.min.js" type="text/javascript"></script>
+<script src="/static/metronic/js/layout.min.js" type="text/javascript"></script>
+<script src="/static/metronic/js/demo.min.js" type="text/javascript"></script>
+<script src="/static/metronic/js/quick-sidebar.min.js" type="text/javascript"></script>
+<script src="/static/metronic/js/quick-nav.min.js" type="text/javascript"></script>
+<script src="https://cdn.bootcss.com/jquery.serializeJSON/2.8.0/jquery.serializejson.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        var whichPage;
+        var pageSize;
+        var pageCount;
+        var param;
+        var url1;
+
+        $(document).ready(function () {
+            $("#sample_editable_1_filter").hide();    /*隐藏找不到的组件*/
+            $("#sample_editable_1_length").hide();    /*隐藏找不到的组件*/
+
+            whichPage = 1;
+            pageSize = 10;
+            param = {};
+            param.whichPage = whichPage;//当前页码
+            param.pageSize = pageSize;//分页数
+
+            f111();
+
+            $("#sample_editable_1  tr:not(:first)").empty("");
+            /*分页查询*/
+            p11();
+            $.ajax({
+                type: "POST",
+                url: "/api/admin/back/cinema",
+                contentType: "application/json; charset=utf-8",
+                cache: false,  //禁用缓存
+                data: JSON.stringify(param),  //传入组装的参数
+                dataType: "json",
+                success: function (result) {
+                    pageCount = parseInt((result.pageCount + pageSize - 1) / pageSize);
+                    f11(result);
+                }
+            });
+            $("#add").attr("href", "#cinema_modal");
+            $(".col-md-6").attr("style", "display:block;");
+        })
+
+        $("#a_form").click(function () {
+            whichPage = 1;
+            param.whichPage = whichPage;
+            $("#sample_editable_1  tr:not(:first)").empty("");
+
+            $("#form").html("影院");
+            $("#th_0").text("ID");
+            $("#th_1").text("影院名字");
+            $("#th_2").text("影院地址");
+            $("#th_3").text("影院联系方式");
+            $("#th_4").text("眼镜价钱");
+            $("#th_5").text("儿童免票");
+            $("#th_6").text("停车场");
+            $("#th_7").text("价钱(起)");
+
+            p11();
+            $.ajax({
+                type: "POST",
+                url: "/api/admin/back/cinema",
+                contentType: "application/json; charset=utf-8",
+                cache: false,  //禁用缓存
+                data: JSON.stringify(param),  //传入组装的参数
+                dataType: "json",
+                success: function (result) {
+                    debugger;//这个不能去掉，去掉就出错了，我也不知道为啥~~，天知道我怎么调出来的
+                    pageCount = parseInt((result.pageCount + pageSize - 1) / pageSize);
+                    f11(result);
+                }
+            });
+
+            $("#add").attr("href", "#cinema_modal");
+            $(".col-md-6").attr("style", "display:block;");
+            f111();
+        })
+
+        $("#b_form").click(function () {
+            whichPage = 1;
+            param.whichPage = whichPage;
+            $("#sample_editable_1  tr:not(:first)").empty("");
+
+            $("#form").html("电影");
+            $("#th_0").text("ID");
+            $("#th_1").text("电影中文名字");
+            $("#th_2").text("电影英文名字");
+            $("#th_3").text("电影分类");
+            $("#th_4").text("屏幕类别");
+            $("#th_5").text("电影时常");
+            $("#th_6").text("电影上映时间");
+            $("#th_7").text("电影评分");
+
+            p11();
+            $.ajax({
+                type: "POST",
+                url: "/api/admin/back/movie",
+                contentType: "application/json; charset=utf-8",
+                cache: false,  //禁用缓存
+                data: JSON.stringify(param),  //传入组装的参数
+                dataType: "json",
+                success: function (result) {
+                    pageCount = parseInt((result.pageCount + pageSize - 1) / pageSize);
+                    f12(result);
+                    result = "";
+                }
+            });
+
+            $("#add").attr("href", "#movie_modal");
+            $(".col-md-6").attr("style", "display:block;");
+            f111();
+        })
+
+        $("#c_form").click(function () {
+            whichPage = 1;
+            param.whichPage = whichPage;
+
+            $("#sample_editable_1  tr:not(:first)").empty("");
+
+            $("#form").html("场次");
+            $("#th_0").text("ID");
+            $("#th_1").text("影院");
+            $("#th_2").text("电影");
+            $("#th_3").text("开场时间");
+            $("#th_4").text("结束时间");
+            $("#th_6").text("语言");
+            $("#th_7").text("几号厅");
+            $("#th_8").text("价钱");
+
+            p11();
+            $.ajax({
+                type: "POST",
+                url: "/api/admin/back/scene",
+                contentType: "application/json; charset=utf-8",
+                cache: false,  //禁用缓存
+                data: JSON.stringify(param),  //传入组装的参数
+                dataType: "json",
+                success: function (result) {
+                    debugger
+                    pageCount = parseInt((result.pageCount + pageSize - 1) / pageSize);
+                    f13(result);
+                    result = "";
+                }
+            });
+            $("#add").attr("href", "#scene_modal");
+            $(".col-md-6").attr("style", "display:none;");
+            f111();
+        })
+
+        /**
+         *  确定新增点击事件
+         */
+        $("#add_sub_1").click(function () {
+            var data = $('#goodsFrm_cinema').serializeJSON();
+            $.ajaxSettings.async = false;
+
+            setTimeout(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/api/admin/back/add/cinema",
+                    contentType: "application/json; charset=utf-8",
+                    cache: false,  //禁用缓存
+                    data: JSON.stringify(data),  //传入组装的参数
+                    dataType: "json",
+                    success: function (result) {
+                        //刷新本页
+                    }
+                });
+            }, 500);
+
+            $('#cinema_modal').modal('toggle');
+            whichPage = 1;
+            param.whichPage = whichPage;
+            $.ajax({
+                type: "POST",
+                url: "/api/admin/back/cinema",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                cache: false,  //禁用缓存
+                data: JSON.stringify(param),  //传入组装的参数
+                success: function (result) {
+                    pageCount = parseInt((result.pageCount + pageSize - 1) / pageSize);
+                    f11(result);
+                }
+            })
+            $.ajaxSettings.async = true;
+            p11();
+        })
+
+        $("#add_sub_2").click(function () {
+            var data = $('#goodsFrm_movie').serializeJSON();
+            $.ajaxSettings.async = false;
+
+            setTimeout(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/api/admin/back/add/movie",
+                    contentType: "application/json; charset=utf-8",
+                    cache: false,  //禁用缓存
+                    data: JSON.stringify(data),  //传入组装的参数
+                    dataType: "json",
+                    success: function (result) {
+
+                    }
+                });
+            }, 500);
+
+            $('#movie_modal').modal('toggle');
+            whichPage = 1;
+            param.whichPage = whichPage;
+            $.ajax({
+                type: "POST",
+                url: "/api/admin/back/movie",
+                contentType: "application/json; charset=utf-8",
+                cache: false,  //禁用缓存
+                data: JSON.stringify(param),  //传入组装的参数
+                dataType: "json",
+                success: function (result) {
+                    pageCount = parseInt((result.pageCount + pageSize - 1) / pageSize);
+                    f12(result);
+                }
+            })
+            $.ajaxSettings.async = true;
+            p11();
+        })
+
+
+        /**
+         * 首页
+         */
+        $("#b1").click(function () {
+
+            $("#sample_editable_1  tr:not(:first)").empty("");
+            whichPage = 1;
+            param.whichPage = whichPage;//当前页码
+            p11();
+
+            /*分页查询*/
+
+            $.ajax({
+                type: "POST",
+                url: "/api/admin/back/" + url1,
+                contentType: "application/json; charset=utf-8",
+                cache: false,  //禁用缓存
+                data: JSON.stringify(param),  //传入组装的参数
+                dataType: "json",
+                success: function (result) {
+                    pageCount = parseInt((result.pageCount + pageSize - 1) / pageSize);
+                    g111(result);
+                }
+            });
+        })
+
+        /**
+         * 上一页
+         */
+        $("#b2").click(function () {
+            $("#sample_editable_1  tr:not(:first)").empty("");
+            whichPage = whichPage - 1;
+            param.whichPage = whichPage;//当前页码
+            p11();
+            /*分页查询*/
+
+            $.ajax({
+                type: "POST",
+                url: "/api/admin/back/" + url1,
+                contentType: "application/json; charset=utf-8",
+                cache: false,  //禁用缓存
+                data: JSON.stringify(param),  //传入组装的参数
+                dataType: "json",
+                success: function (result) {
+                    pageCount = parseInt((result.pageCount + pageSize - 1) / pageSize);
+                    g111(result);
+                }
+            });
+        })
+
+        /**
+         * 下一页
+         */
+        $("#b3").click(function () {
+            $("#sample_editable_1  tr:not(:first)").empty("");
+            whichPage++;
+            param.whichPage = whichPage;//当前页码
+            p11();
+
+            /*分页查询*/
+
+            $.ajax({
+                type: "POST",
+                url: "/api/admin/back/" + url1,
+                contentType: "application/json; charset=utf-8",
+                cache: false,  //禁用缓存
+                data: JSON.stringify(param),  //传入组装的参数
+                dataType: "json",
+                success: function (result) {
+                    pageCount = parseInt((result.pageCount + pageSize - 1) / pageSize);
+                    g111(result);
+                }
+            });
+        })
+
+        /**
+         * 尾页
+         */
+        $("#b4").click(function () {
+            $("#sample_editable_1  tr:not(:first)").empty("");
+            whichPage = pageCount;
+            param.whichPage = whichPage;//当前页码
+            p11();
+            /*分页查询*/
+
+            $.ajax({
+                type: "POST",
+                url: "/api/admin/back/" + url1,
+                contentType: "application/json; charset=utf-8",
+                cache: false,  //禁用缓存
+                data: JSON.stringify(param),  //传入组装的参数
+                dataType: "json",
+                success: function (result) {
+                    pageCount = parseInt((result.pageCount + pageSize - 1) / pageSize);
+                    g111(result);
+                }
+            });
+        })
+
+
+        function f12(result) {
+            $("#sample_editable_1  tr:not(:first)").empty("");
+            for (var i = 0; i < result.data.length; i++) {
+                var item1 = "<tr>" +
+                    "<td>" + result.data[i].id + "</td>" +
+                    "<td>" + result.data[i].movieName + "</td>" +
+                    "<td>" + result.data[i].movieEnglistName + "</td>" +
+                    "<td>" + result.data[i].movieClassify1 + "," + result.data[i].movieClassify2 + "," + result.data[i].movieClassify3 + "</td>" +
+                    "<td>" + result.data[i].movieFeel + "</td>" +
+                    "<td>" + result.data[i].movieLength + "</td>" +
+                    "<td>" + result.data[i].movieDate + "</td>" +
+                    "<td>" + result.data[i].movieScore + "</td>" +
+                    "<td>" +
+                    "<a class=\"edit\" href=\"javascript:;\" onclick='deletedata(" + result.data[i].id + ")'>删除</a>" +
+                    "</td>" +
+                    "<tr>";
+                $("#tr_1").append(item1); //拼接标签
+            }
+        }
+
+        function f11(result) {
+            $("#sample_editable_1  tr:not(:first)").empty("");
+            for (var i = 0; i < result.data.length; i++) {
+                var item1 = "<tr>" +
+                    "<td>" + result.data[i].id + "</td>" +
+                    "<td>" + result.data[i].cinemaName + "</td>" +
+                    "<td>" + result.data[i].cinemaAddress + "</td>" +
+                    "<td>" + result.data[i].cinemaPhone + "</td>" +
+                    "<td>" + result.data[i].cinemaGlasses + "</td>" +
+                    "<td>" + result.data[i].cinemaPreferences + "</td>" +
+                    "<td>" + result.data[i].cinemaParking + "</td>" +
+                    "<td>" + result.data[i].cinemaPrice + "</td>" +
+                    "<td>" +
+                    "<a class=\"edit\" href=\"javascript:;\" onclick='deletedata(" + result.data[i].id + ")'>删除</a>" +
+                    "</td>" +
+                    "<tr>";
+                $("#tr_1").append(item1); //拼接标签
+            }
+        }
+
+        function f13(result) {
+            $("#sample_editable_1  tr:not(:first)").empty("");
+            for (var i = 0; i < result.data.length; i++) {
+                var item1 = "<tr>" +
+                    "<td>" + result.data[i].id + "</td>" +
+                    "<td>" + result.data[i].cinemaName + "</td>" +
+                    "<td>" + result.data[i].movieName + "</td>" +
+                    "<td>" + result.data[i].viewingProjectionStart + "</td>" +
+                    "<td>" + result.data[i].viewingProjectionEnd + "</td>" +
+                    "<td>" + result.data[i].viewingLanguage + "</td>" +
+                    "<td>" + result.data[i].viewingHall + "</td>" +
+                    "<td>" + result.data[i].viewingPrice + "</td>" +
+                    "<td>" +
+                    "<a class=\"edit\" href=\"javascript:;\" onclick='deletedata(" + result.data[i].id + ")'>删除</a>" +
+                    "</td>" +
+                    "<tr>"
+                $("#tr_1").append(item1); //拼接标签
+            }
+        }
+        function p11() {
+            if (whichPage == 1) {
+                $("#b1").attr("disabled", true);
+                $("#b2").attr("disabled", true);
+                $("#b3").attr("disabled", false);
+                $("#b4").attr("disabled", false);
+            } else if (whichPage == pageCount) {
+                $("#b1").attr("disabled", false);
+                $("#b2").attr("disabled", false);
+                $("#b3").attr("disabled", true);
+                $("#b4").attr("disabled", true);
+            } else {
+                $("#b1").attr("disabled", false);
+                $("#b2").attr("disabled", false);
+                $("#b3").attr("disabled", false);
+                $("#b4").attr("disabled", false);
+            }
+        }
+
+        function f111() {
+            var fcc = $("#form").text();
+            if (fcc == "影院") {
+                url1 = "cinema";
+            }
+            if (fcc == "电影") {
+                url1 = "movie";
+            }
+            if (fcc == "场次") {
+                url1 = "scene";
+            }
+        }
+
+        function g111(result) {
+            var fcc = $("#form").text();
+            if (fcc == "影院") {
+                f11(result);
+            }
+            if (fcc == "电影") {
+                f12(result);
+            }
+            if (fcc == "场次") {
+                f13(result);
+            }
+        }
+    })
+
+
+
+
+    /*
+*   删除点击事件
+* */
+    function deletedata(id) {
+        var name = $("#form").text();
+        /*将ajax变为同步*/
+        $.ajaxSettings.async = false;
+        $.ajax({
+            type: "POST",
+            url: "/api/admin/back/delete",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({
+                "id": id,
+                "name": name
+            }),
+            success: function (result) {
+
+            }
+        })
+        /*刷新数据*/
+        if (name == "影院") {
+            $("#a_form").trigger("click");
+        }
+        if (name == "电影") {
+            $("#b_form").trigger("click");
+        }
+        if (name == "场次") {
+            $("#c_form").trigger("click");
+        }
+        /*将ajax变为异步*/
+        $.ajaxSettings.async = true;
+    }
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>详情</title>
+    <link href="/static/css/details.css" type="text/css" rel="stylesheet" />
+    <link href="/static/js/layer-v3.0.3/layer/mobile/need/layer.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="/static/js/phone.js" ></script>
+    <script type="text/javascript" src="/static/js/layer-v3.0.3/layer/layer.js"></script>
+    <link rel="stylesheet" href="/static/css/header1.css" type="text/css">
+</head>
+
+<body>
+<div class="header">
+    <div class="header-inner">
+        <a href="/static/index.html" style="float: left;"><img src="../static/user/image/mengxiang.jpg" style="width: 133px;height: 80px"></a>
+        <!--<a href="/" class="logo" data-act="icon-click"></a>-->
+
+        <div class="city-container" data-val="{currentcityid:20 }">
+
+            <div class="city-list" data-val="{ localcityid: 20 }">
+                <div class="city-list-header">定位城市：<a class="js-geo-city">广州</a></div>
+
+            </div>
+        </div>
+
+
+        <div class="nav">
+            <ul class="navbar">
+                <li><a href="/static/index.html" data-act="home-click"  >首页</a></li>
+                <li><a href="/static/index.html" data-act="movies-click" >电影</a></li>
+                <li><a href="/static/profile.html"  >个人中心</a></li>
+            </ul>
+        </div>
+
+        <!--<div class="user-info">
+            <div class="user-avatar has-login">
+                <img id="small_persionImg" src="https://img.meituan.net/maoyanuser/63957f10ae9679c95d4ba26ad1bd29c816882.png">
+                <span class="caret"></span>
+                <ul class="user-menu">
+                    <li class="text">
+                        <a href="/static/orders.html">我的订单</a>
+                    </li>
+                    <li class="text login-name" id="li_title"><a href="javascript:void 0">基本信息</a></li>
+                    <li id="userLogout" class="text"><a href="/static/index.html">退出登录</a></li>
+                </ul>
+            </div>
+        </div>-->
+<!--
+        <form action="#" target="_blank" class="search-form" data-actform="search-click" >
+            <input name="kw" class="search" type="search" maxlength="32" placeholder="找影视剧、影人、影院" autocomplete="off">
+            <input class="submit" type="submit" value="">
+        </form>
+-->
+        <div class="app-download" style="visibility: hidden">
+            <a href="#" target="_blank">
+                <span class="iphone-icon"></span>
+                <span class="apptext">APP下载</span>
+                <span class="caret"></span>
+            </a>
+        </div>
+
+    </div>
+</div>
+<div class="header-placeholder"></div>
+<div class="whole">
+    <div class="movie">
+        <div class="back"><img src="/static/image/back.png" /></div>
+        <img id="imgs" src="" />
+
+    </div>
+    <div class="detail">
+        <div class="bol"><img src="/static/image/bg-bg.png" /></div>
+        <div class="det-con">
+            <div class="common det-c">
+                <div class="jz-pic">
+                    <img id="moviePhoto" src="" />
+                </div>
+                <div class="det-inf">
+                    <p class="det-titles">
+                        <span id="movieName"></span>
+                        <span class="eng" id="movieEnglistName"></span>
+                    </p>
+                    <ul class="stars">
+                        <li><h3 id="movieScore" style="background-color: #c0ff31"></h3></li>
+                    </ul>
+                    <p id="movieClassify"></p>
+                    <div style="width:200px ; margin-top: 55px">
+                        <button style="font-size: 35px"><a href="/cinemas/show">立即订票</a></button>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="common parti">
+                <span id="movieIntro"></span>
+            </div>
+
+            <div class="common stage-photo">
+                <h3>剧照和视频</h3>
+                <ul>
+                    <li><img id="moviePicture1" src="" width="820px" height="460px" /></li>
+                    <li><img id="moviePicture2" src="" width="820px" height="460px"/></li>
+                    <li><img id="moviePicture3" src="" width="820px" height="460px"/></li>
+                    <li><img id="moviePicture4" src="" width="820px" height="460px"/></li>
+                    <li><img id="moviePicture5" src="" width="820px" height="460px"/></li>
+                    <li><img id="moviePicture6" src="" width="820px" height="460px"/></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <a class="footer" href="/cinemas/show">立即订票</a>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $('.movie').click(function(){
+            movie();
+        });
+
+
+        $('.back').on('click',function(){
+            window.history.go(-1);
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/movie/one",
+            contentType: "application/json; charset=utf-8",
+            cache: false,  //禁用缓存
+            // data: JSON.stringify(data),  //传入组装的参数
+            dataType: "json",
+
+            success: function (result) {
+                if(result.length != 0){
+                    $.each(result,function (index,itme) {
+                        var movieClassify = itme.movieClassify1 + " " + itme.movieClassify2 + " " + itme.movieClassify3;
+
+                        $("#movieName").html(itme.movieName);
+                        $("#movieEnglistName").html(itme.movieEnglistName);
+                        $("#movieIntro").html(itme.movieIntro);
+                        $("#movieClassify").html(movieClassify);
+                        $("#movieScore").html(itme.movieScore);
+                        $("#moviePhoto").attr("src", itme.moviePhoto);
+                        $("#moviePicture1").attr("src", itme.moviePicture1);
+                        $("#moviePicture2").attr("src", itme.moviePicture2);
+                        $("#moviePicture3").attr("src", itme.moviePicture3);
+                        $("#moviePicture4").attr("src", itme.moviePicture4);
+                        $("#moviePicture5").attr("src", itme.moviePicture5);
+                        $("#moviePicture6").attr("src", itme.moviePicture6);
+                        $("#imgs").attr("src", itme.moviePosters);
+
+                    })
+                }
+
+            }
+        });
+
+    });
+</script>
+</body>
+</html>

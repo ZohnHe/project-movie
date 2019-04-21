@@ -1,0 +1,336 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0;"/>
+<title>电影选购</title>
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/style.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/static/js/phone.js" ></script>
+<script type="text/javascript" src="/static/js/TouchSlide.1.1.js"></script>
+<script type="text/javascript" src="/static/js/movie.js"></script><link type="text/css" rel="stylesheet" href="/static/css/header1.css">
+<!--<link type="text/css" href="/static/css/bootstrap.min.css" rel="stylesheet">-->
+<!--
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+-->
+<script type="text/javascript">
+    $(function () {
+        TouchSlide({
+            slideCell:"#carousel",
+            titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+            mainCell:".bd ul",
+            effect:"left",
+            autoPlay:true,//自动播放
+            autoPage:true, //自动分页
+            switchLoad:"_src" //切换加载，真实图片路径为"_src"
+        });
+
+        var pageNum=1;
+        var pageSize=5;
+        var pageCount;
+        var param = {};
+        param.pageNum = pageNum; //当前页码
+        param.pageSize = pageSize; //分页数
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "POST",
+                url: "/movie/pageList",
+                contentType: "application/json; charset=utf-8",
+                cache: false,  //禁用缓存
+                data: JSON.stringify(param),  //传入组装的参数
+                dataType: "json",
+                success: function (result) {
+                    if (result.code != "200") {
+                        alert(result.msg);
+                    } else {
+                        pageCount=parseInt((result.pageCount+pageSize-1)/pageSize);
+                        //alert(result.msg);
+                        var htmlStr="";
+                        htmlStr=f(result);
+                        $("#movieList").html(htmlStr);
+                        //alert(htmlStr);
+                        //$('#tbody').html(html);
+                        /*分页--梓锋*/
+                        page();
+
+                    }
+                }
+            });
+        });
+
+
+
+        /*首页*/
+        $("#first").click(function () {
+            $("#movieList").empty();
+            pageNum=1;
+            param.pageNum =pageNum;
+
+            $.ajax({
+                type: "POST",
+                url: "/movie/pageList",
+                contentType: "application/json; charset=utf-8",
+                cache: false,  //禁用缓存
+                data: JSON.stringify(param),  //传入组装的参数
+                dataType: "json",
+                success: function (result) {
+                    if (result.code != "200") {
+                        alert(result.msg);
+                    } else {
+                        //alert(result.msg);
+                        var htmlStr="";
+                        htmlStr=f(result);
+                        $("#movieList").html(htmlStr);
+                        //alert(htmlStr);
+                        //$('#tbody').html(html);
+                        page();
+
+                    }
+                }
+            });
+            //请求
+        })
+        /*最后一页*/
+        $("#final").click(function () {
+            $("#movieList").empty();
+            param.pageNum =pageCount;
+            pageNum=pageCount;
+            $.ajax({
+                type: "POST",
+                url: "/movie/pageList",
+                contentType: "application/json; charset=utf-8",
+                cache: false,  //禁用缓存
+                data: JSON.stringify(param),  //传入组装的参数
+                dataType: "json",
+                success: function (result) {
+                    if (result.code != "200") {
+                        alert(result.msg);
+                    } else {
+                        //alert(result.msg);
+                        var htmlStr="";
+                        htmlStr=f(result);
+                        $("#movieList").html(htmlStr);
+                        //alert(htmlStr);
+                        //$('#tbody').html(html);
+                        /*分页--梓锋*/
+                        page();
+
+                    }
+                }
+            });
+        })
+        /*下一页*/
+        $("#next").click(function () {
+            $("#movieList").empty();
+            pageNum=pageNum+1;
+            param.pageNum =pageNum;
+            $.ajax({
+                type: "POST",
+                url: "/movie/pageList",
+                contentType: "application/json; charset=utf-8",
+                cache: false,  //禁用缓存
+                data: JSON.stringify(param),  //传入组装的参数
+                dataType: "json",
+                success: function (result) {
+                    if (result.code != "200") {
+                        alert(result.msg);
+                    } else {
+                        //alert(result.msg);
+                        var htmlStr="";
+                        htmlStr=f(result);
+                        $("#movieList").html(htmlStr);
+                        //alert(htmlStr);
+                        //$('#tbody').html(html);
+                        /*分页--梓锋*/
+                        page();
+
+                    }
+                }
+            });
+        })
+        /*上一页*/
+        $("#last").click(function () {
+            $("#movieList").empty();
+            pageNum=pageNum-1;
+            param.pageNum =pageNum;
+            $.ajax({
+                type: "POST",
+                url: "/movie/pageList",
+                contentType: "application/json; charset=utf-8",
+                cache: false,  //禁用缓存
+                data: JSON.stringify(param),  //传入组装的参数
+                dataType: "json",
+                success: function (result) {
+                    if (result.code != "200") {
+                        alert(result.msg);
+                    } else {
+                        //alert(result.msg);
+                        var htmlStr="";
+                        htmlStr=f(result);
+                        $("#movieList").html(htmlStr);
+                        //alert(htmlStr);
+                        //$('#tbody').html(html);
+                        /*分页--梓锋*/
+                        page();
+
+                    }
+                }
+            });
+        })
+
+        function f(result) {
+            var htmlStr="";
+            for(var i=0;i<result.data.length;i++){
+                htmlStr+=
+                    `
+      	<li>
+            	<a href="/movie/details?movieId=${result.data[i].id}">
+                    <span class="tag">${result.data[i].movieScore}</span>
+                    <div class="posters">
+                        <img src="${result.data[i].moviePhoto}" />
+                    </div>
+                    <div class="post-content">
+                        <div class="left-con">
+                            <p class="tit">
+                            	<small>${result.data[i].movieName}</small>
+                            	 <span>
+                                	<i>${result.data[i].movieFeel}</i>
+                                </span>
+                            </p>
+                            <p class="eng">${result.data[i].movieEnglistName}</p>
+                            <p class="eng">${result.data[i].movieClassify1} ${result.data[i].movieClassify2} ${result.data[i].movieClassify3}</p>
+                            <p class="eng"><span>上映时间:${result.data[i].movieDate}</span></p>
+                        </div>
+                        <div class="right-btn">
+                            <div class="ticket-btn">购票</div>
+                        </div>
+                    </div>
+                 </a>
+            </li>
+                      `;
+
+            }
+            return htmlStr;
+        }
+
+        function page(){
+            if(pageNum==1){
+                $("#first").hide();
+                $("#last").hide();
+                $("#next").show();
+                $("#final").show();
+            }else  if(pageNum==pageCount){
+                $("#final").hide();
+                $("#last").show();
+                $("#next").hide();
+                $("#first").show();
+            }
+            else{
+                $("#first").show();
+                $("#next").show();
+                $("#last").show();
+                $("#final").show();
+            }
+        }
+
+
+
+    })
+</script>
+
+</head>
+
+<body>
+<div class="header">
+    <div class="header-inner">
+        <a href="/static/index.html" style="float: left;"><img src="../static/user/image/mengxiang.jpg" style="width: 133px;height: 80px"></a>
+        <!--<a href="/" class="logo" data-act="icon-click"></a>-->
+
+        <div class="city-container" data-val="{currentcityid:20 }">
+
+            <div class="city-list" data-val="{ localcityid: 20 }">
+                <div class="city-list-header">定位城市：<a class="js-geo-city">广州</a></div>
+
+            </div>
+        </div>
+
+
+        <div class="nav">
+            <ul class="navbar">
+                <li><a href="/static/index.html" data-act="home-click"  >首页</a></li>
+                <li><a href="/static/index.html" data-act="movies-click" >电影</a></li>
+                <li><a href="/static/profile.html"  >个人中心</a></li>
+            </ul>
+        </div>
+
+        <!--<div class="user-info">
+            <div class="user-avatar has-login">
+                <img id="small_persionImg" src="https://img.meituan.net/maoyanuser/63957f10ae9679c95d4ba26ad1bd29c816882.png">
+                <span class="caret"></span>
+                <ul class="user-menu">
+                    <li class="text">
+                        <a href="/static/orders.html">我的订单</a>
+                    </li>
+                    <li class="text login-name" id="li_title"><a href="javascript:void 0">基本信息</a></li>
+                    <li id="userLogout" class="text"><a href="/static/index.html">退出登录</a></li>
+                </ul>
+            </div>
+        </div>-->
+
+        <form action="#" target="_blank" class="search-form" data-actform="search-click" >
+            <input name="kw" class="search" type="search" maxlength="32" placeholder="找影视剧、影人、影院" autocomplete="off">
+            <input class="submit" type="submit" value="">
+        </form>
+
+        <div class="app-download" style="visibility: hidden">
+            <a href="#" target="_blank">
+                <span class="iphone-icon"></span>
+                <span class="apptext">APP下载</span>
+                <span class="caret"></span>
+            </a>
+        </div>
+
+    </div>
+</div>
+<div class="header-placeholder"></div>
+
+<div class="whole">
+	<!--头部轮播-->
+    <div id="carousel" class="carousel">
+	  	<div class="hd">
+			<ul></ul>
+      	</div>
+      <div class="bd">
+            <ul>
+                <li><a href="/movie/details?movieId=1"><img _src="/static/image/lunbo1.jpg" src="/static/image/blank.png" /></a></li>
+                <li><a href="/movie/details?movieId=2"><img _src="/static/image/lunbo2.jpg" src="/static/image/blank.png"/></a></li>
+                <li><a href="/movie/details?movieId=3"><img _src="/static/image/lunbo3.jpg" src="/static/image/blank.png" /></a></li>
+                <li><a href="/movie/details?movieId=4"><img _src="/static/image/lunbo4.jpg" src="/static/image/blank.png"/></a></li>
+            </ul>
+      </div>
+       <!-- <div class="search sear-show">
+        	<img src="/static/image/search.png" />
+        </div>-->
+        <div class="search-new">
+        	<input type="text" value="" placeholder="请输入您要搜索的内容" />
+            <div class="sear"><img src="/static/image/search.png" /></div>
+            <div class="close"><i class="fa fa-forward"></i></div>
+        </div>
+    </div>
+    <!--头部轮播END-->
+    
+    <div class="movie">
+      <ul id="movieList">
+        </ul>
+    </div>
+    
+</div>
+<a href="#" id="first">首页 </a>
+<a href="#" id="last">上一页 </a>
+<a href="#" id="next">下一页 </a>
+<a href="#" id="final">尾页 </a>
+
+</body>
+</html>

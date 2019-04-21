@@ -1,0 +1,285 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
+<title>电影选购</title>
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/cinemas/css/tickets.css" type="text/css" rel="stylesheet" />
+<link href="/static/cinemas/css/ticket1.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/static/cinemas/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/static/cinemas/js/phone.js" ></script>
+<script type="text/javascript" src="/static/cinemas/js/menu_x.js"></script>
+</head>
+
+<body>
+<div class="whole">
+
+	<header class="header">
+        <a href="javascript:history.back(-1)" class="fa fa-angle-left"></a>
+        <span class="names">梦想影城</span>
+        <span class="collect">
+        	<i class="fa fa-star-o"></i>
+        </span>
+    </header>
+    <div class="banner cinema-banner">
+        <div class="wrapper clearfix">
+            <div class="cinema-left">
+                <div class="avatar-shadow">
+                    <img id="img" class="avatar" src="">
+                </div>
+            </div>
+
+            <div class="cinema-main clearfix">
+                <div class="cinema-brief-container">
+                    <h3 class="name text-ellipsis"><span id="cinemaName"></span></h3>
+                    <div class="address text-ellipsis"><span id="cinemaAddress"></span></div>
+                    <div class="telphone"><span id="cinemaPhone"></span></div>
+
+                    <div class="features-group">
+                        <div class="group-title">影院服务</div>
+
+                        <div class="feature">
+                            <span class="tag ">3D眼镜收费</span>
+                            <p class="desc text-ellipsis" ><span id="cinemaGlasses"></span></p>
+                        </div>
+                        <div class="feature">
+                            <span class="tag ">儿童优惠</span>
+                            <p class="desc text-ellipsis" ><span id="cinemaPreferences"></span></p>
+                        </div>
+                        <div class="feature">
+                            <span class="tag park-tag">可停车</span>
+                            <p class="desc text-ellipsis"><span id="cinemaParking"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="margin-top: 30px">
+    <div style="width: 200px;float: left ;margin-left: 20px ">
+                <img id="img2" src="" height="230px" width="200px">
+
+    </div>
+    <div style="width: 400px;float: left ;margin-left: 20px">
+        <h3>片名:<span id="movieName"></span></h3><br />
+        <h5>类型:<span id="movieClassify"></span></h5><br />
+        <span>片长：<span id="movieLength"></span></span><br /><br />
+        <span>上映时间:<span id="movieDate"></span></span><br />
+    </div>
+
+<div style="width: 820px ; margin-left: 20px">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+<h3>电影详情:</h3>
+    <span id="movieIntro" style="font-size: 18px"></span>
+</div>
+</div>
+    <div class="tips">温馨提示：电影开场前30分钟关闭在线售票</div>
+    
+    <div class="tab date">
+        <!---tab日期标签滑动--->
+        <div id="J_MenuX">
+            <div class="xs-container">
+                <ul class="xs-content nav nav-pills nav-justified" id="menus_xx" _xx="0">
+                    <li id="time"></li>
+                </ul>
+            </div>
+        </div>
+        <!---tab标签滑动END--->
+    </div>
+    <div class="tickets-list">
+    	<ul id="list">
+            <li>
+                <div class="ticket-info">
+                    <span class="start">开始</span>
+                </div>
+                <div class="ticket-info">
+                    <span class="start">结束</span>
+                </div>
+                <div class="ticket-info">
+                    <span class="start">语言版本</span>
+                </div>
+                <div class="ticket-info">
+                    <span class="start">放映厅</span>
+                </div>
+
+            </li>
+        </ul>
+    </div>
+    
+</div>
+
+<script type="text/javascript">
+	var menux = new menuX("#J_MenuX",0);
+</script>
+
+<script type="text/javascript">
+$(function(){
+	
+	$('.collect .fa').click(function(){
+		if($(this).hasClass('fa-star-o')){
+			$(this).removeClass('fa-star-o').addClass('fa-star');
+		}else{
+			$(this).removeClass('fa-star').addClass('fa-star-o');
+		}
+	});
+
+	$(function () {
+        $.ajax({
+            type: "GET",
+            url: "/cinemas/one",
+            contentType: "application/json; charset=utf-8",
+            cache: false,  //禁用缓存
+            // data: JSON.stringify(data),  //传入组装的参数
+            dataType: "json",
+
+            success: function (result) {
+                if(result.length != 0){
+                     $.each(result,function (index,itme) {
+                       var movieClassify = itme.movieClassify1 +" "+ itme.movieClassify2 + " "+ itme.movieClassify3;
+                       $("#img").attr("src",itme.cinemaImg);
+                       $("#cinemaName").html(itme.cinemaName);
+                       $("#cinemaAddress").html(itme.cinemaAddress);
+                       $("#cinemaPhone").html(itme.cinemaPhone);
+                       $("#cinemaGlasses").html(itme.cinemaGlasses);
+                       $("#cinemaPreferences").html(itme.cinemaPreferences);
+                       $("#cinemaParking").html(itme.cinemaParking);
+                       $("#movieName").html(itme.movieName);
+                       $("#movieClassify").html(movieClassify);
+                       $("#movieDate").html(itme.movieDate);
+                       $("#movieLength").html(itme.movieLength);
+                       $("#movieIntro").html(itme.movieIntro);
+                       $("#img2").attr("src",itme.moviePhoto);
+                     })
+                }
+
+            }
+        });
+
+        $.ajax({
+            type: "GET",
+            url: "/cinemas/TbTimeAll",
+            contentType: "application/json; charset=utf-8",
+            cache: false,  //禁用缓存
+            // data: JSON.stringify(data),  //传入组装的参数
+            dataType: "json",
+
+            success: function (result) {
+                if(result.length != 0){
+                     $.each(result,function (index,itme) {
+                         var time1 = datetimeFormat_1(itme.viewingProjectionStart);
+                         var time2 = datetimeFormat_1(itme.viewingProjectionEnd);
+                         var time3 = datetimeFormat_2(itme.viewingProjectionEnd);
+                         var item =
+                             "<li>" +
+                             "<div class=\"ticket-info\">" +
+                         " <span class=\"start\">"+time1+"</span>" +
+                         " </div>" +
+                         "<div class=\"ticket-info\">" +
+                         "<span>"+time2+"</span>" +
+                         "</div>" +
+                         "<div class=\"ticket-info\">" +
+                         "<span>"+itme.viewingLanguage+"</span>" +
+                         "</div>" +
+                         "<div class=\"ticket-info\">" +
+                         "<span>"+itme.viewingHall+"</span>" +
+                         "</div>" +
+                         "<div class=\"buy-btn\">" +
+                         "<span>"+itme.viewingPrice+"<b>元</b></span>" +
+                         "<a href=\"\\xseat?scnenId="+itme.id+"\">选座购票</a>" +
+                         "</div>" +
+
+                         "</li>"
+
+                         $("#list").append(item); //拼接标签
+                         $("#time").html(time3);
+                     })
+                }
+
+            }
+        });
+
+
+
+    })
+
+    function datetimeFormat_1(longTypeDate){
+        var datetimeType = "";
+        var date = new Date();
+        date.setTime(longTypeDate);
+        datetimeType+=  getHours(date);   //时
+        datetimeType+= ":" + getMinutes(date);      //分
+        return datetimeType;
+    }
+    function datetimeFormat_2(longTypeDate){
+        var datetimeType = "";
+        var date = new Date();
+        date.setTime(longTypeDate);
+        datetimeType+= getMonth(date); //月
+        datetimeType += "-" + getDay(date);   //日
+
+        return datetimeType;
+    }
+
+
+//返回 01-12 的月份值
+    function getMonth(date){
+        var month = "";
+        month = date.getMonth() + 1; //getMonth()得到的月份是0-11
+        if(month<10){
+            month = "0" + month;
+        }
+        return month;
+    }
+//返回01-30的日期
+    function getDay(date){
+        var day = "";
+        day = date.getDate();
+        if(day<10){
+            day = "0" + day;
+        }
+        return day;
+    }
+//返回小时
+    function getHours(date){
+        var hours = "";
+        hours = date.getHours();
+        if(hours<10){
+            hours = "0" + hours;
+        }
+        return hours;
+    }
+//返回分
+    function getMinutes(date){
+        var minute = "";
+        minute = date.getMinutes();
+        if(minute<10){
+            minute = "0" + minute;
+        }
+        return minute;
+    }
+//返回秒
+    function getSeconds(date){
+        var second = "";
+        second = date.getSeconds();
+        if(second<10){
+            second = "0" + second;
+        }
+        return second;
+    }
+
+})
+
+
+</script>
+</body>
+</html>

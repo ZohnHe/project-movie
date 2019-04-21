@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/css/1.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/header1.css" type="text/css">
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript">
+        var SysSecond;
+        var InterValObj;
+        $(document).ready(function() {
+            SysSecond =840; //这里获取倒计时的起始时间
+            InterValObj = window.setInterval(SetRemainTime, 1000); //间隔函数，1秒执行
+            $.get("/getOrder" , function (data, status) {
+                if (status == "success") {
+                    var order= data.data;
+                   $("#price").text(order.payCount);
+                    var mystime=new Date();
+                    mystime.setTime(order.time);
+                    var addstime = mystime.getFullYear() +'-'+ fullNum(Number(mystime.getMonth()) + 1)+ '-' + fullNum(mystime.getDate())+ ' '+ fullNum(mystime.getHours())+ ":" + fullNum(mystime.getMinutes()) + ":" + fullNum(mystime.getSeconds());
+                    $("#showtime").text(addstime);
+                    $("#movie-name").text(order.movieName);
+                    $("#cinema-name").text(order.cinemaName);
+                    $("#hall").text(order.viewingHall);
+                    var seat1=parseInt(order.seat1.split("-")[1]);
+                    var seat2;
+                    $("#seat").html("<span class=\"\"><i>"+Math.ceil(seat1/17)+"</i>排<i>"+seat1%17+"</i>座</span>");
+                    if(order.seat2!=null&&order.seat2!=""){
+                        seat2=parseInt(order.seat2.split("-")[1]);
+                        $("#seat").html("<span class=\"\"><i>"+Math.ceil(seat1/17)+"</i>排<i>"+seat1%17+"</i>座 </span>"+"<span class=\"\"><i>"+Math.ceil(seat2/17)+"</i>排<i>"+seat2%17+"</i>座</span>");
+
+                    }
+
+
+                }
+            });
+
+        });
+
+        function fullNum(obj){
+            if(Number(obj) < 10){
+                return '0' + obj;
+            }else{
+                return obj;
+            }
+              }
+
+
+        //将时间减去1秒，计算天、时、分、秒
+        function SetRemainTime() {
+            if (SysSecond > 0) {
+                SysSecond = SysSecond - 1;
+                var second = Math.floor(SysSecond % 60);            // 计算秒
+                var minite = Math.floor((SysSecond / 60) % 60);      //计算分
+                var hour = Math.floor((SysSecond / 3600) % 24);      //计算小时
+                var day = Math.floor((SysSecond / 3600) / 24);       //计算天
+                //var hourDiv = "<span id='hourSpan'>"+ hour + "小时"+"</span>";
+                //var dayDiv = "<span id='daySpan'>"+ day + "天"+"</span>";
+                $("#remainTime").html( "请在"+minite + "分钟" + second + "秒内完成支付");
+                $("#remainTime").html( "请在<span class=\"minute\">"+minite + "</span>分钟<span class=\"second\">" + second + "</span>秒内完成支付");
+            } else {//剩余时间小于或等于0的时候，就停止间隔函数
+                window.clearInterval(InterValObj);
+                //这里可以添加倒计时时间为0后需要执行的事件
+                //alert("未在14分钟内支付，订单失效");
+                $.get("/unActive" , function (data, status){
+                    if(status=="success"){
+                        alert("未在14分钟内支付，订单失效");
+                        window.location.href="/static/choose_seat.html";
+                    }
+                })
+            }
+        }
+
+        function f() {
+            $.get("/toPay" , function (data, status){
+                alert("支付成功，请记好您的取票码："+data);
+                window.location.href="/static/index.html";
+            })
+        }
+    </script>
+</head>
+<body>
+<div class="container" id="app" class="page-order/confirm" >
+    <div class="header">
+        <div class="header-inner">
+            <a href="/static/index.html" style="float: left;"><img src="../static/user/image/mengxiang.jpg" style="width: 133px;height: 80px"></a>
+            <!--<a href="/" class="logo" data-act="icon-click"></a>-->
+
+            <div class="city-container" data-val="{currentcityid:20 }">
+
+                <div class="city-list" data-val="{ localcityid: 20 }">
+                    <div class="city-list-header">定位城市：<a class="js-geo-city">广州</a></div>
+
+                </div>
+            </div>
+
+
+            <div class="nav">
+                <ul class="navbar">
+                    <li><a href="/static/index.html" data-act="home-click"  >首页</a></li>
+                    <li><a href="/static/index.html" data-act="movies-click" >电影</a></li>
+                    <li><a href="/static/profile.html"  >个人中心</a></li>
+                </ul>
+            </div>
+
+            <!--<div class="user-info">
+                <div class="user-avatar has-login">
+                    <img id="small_persionImg" src="https://img.meituan.net/maoyanuser/63957f10ae9679c95d4ba26ad1bd29c816882.png">
+                    <span class="caret"></span>
+                    <ul class="user-menu">
+                        <li class="text">
+                            <a href="/static/orders.html">我的订单</a>
+                        </li>
+                        <li class="text login-name" id="li_title"><a href="javascript:void 0">基本信息</a></li>
+                        <li id="userLogout" class="text"><a href="/static/index.html">退出登录</a></li>
+                    </ul>
+                </div>
+            </div>-->
+
+            <!--<form action="#" target="_blank" class="search-form" data-actform="search-click" >
+                <input name="kw" class="search" type="search" maxlength="32" placeholder="找影视剧、影人、影院" autocomplete="off">
+                <input class="submit" type="submit" value="">
+            </form>-->
+
+            <div class="app-download" style="visibility: hidden">
+                <a href="#" target="_blank">
+                    <span class="iphone-icon"></span>
+                    <span class="apptext">APP下载</span>
+                    <span class="caret"></span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+    <div class="header-placeholder"></div>
+
+
+    <div class="count-down-wrapper">
+        <div class="count-down" data-payleftseconds="839">
+            <p class="time-left" id="remainTime">
+                <!--请在
+                <span class="minute">13</span>
+                分钟
+                <span class="second">59</span>秒内完成支付-->
+            </p>
+            <p class="tip">超时订单会自动取消，如遇支付问题，请致电猫眼客服：666-666-666</p>
+        </div>
+    </div>
+
+    <p class="warning">请仔细核对场次信息，出票后将<span class="attention">无法退票和改签</span></p>
+
+    <table class="order-table">
+        <thead>
+        <tr>
+            <th style="text-align: center">影片</th>
+            <th style="text-align: center">时间</th>
+            <th style="text-align: center">影院</th>
+            <th style="text-align: center">座位</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="movie-name" id="movie-name"></td>
+            <td class="showtime" id="showtime"></td>
+            <td class="cinema-name" id="cinema-name"></td>
+            <td>
+                <span class="hall" id="hall">2号厅</span>
+                <div class="seats">
+                    <div id="seat">
+                        <!--<span class=""><i>4</i>排<i>05</i>座</span>
+                        <span class="border"><i>4</i>排<i>04</i>座</span>-->
+                    </div>
+                    <div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <div class="right">
+        <div class="price-wrapper">
+            <span>实际支付 :</span>
+            <span class="price" id="price"></span>
+        </div>
+        <div><div class="pay-btn" onclick="f()" data-order-id="20838227269" data-act="pay-click" data-bid="b_u30afks6">确认支付</div></div>
+    </div>
+    <div class="modal-container" style="display:none">
+        <div class="modal">
+            <span class="icon"></span>
+
+            <p class="tip">支付超时，该订单已失效，请重新购买</p>
+
+            <div class="ok-btn btn">我知道了</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

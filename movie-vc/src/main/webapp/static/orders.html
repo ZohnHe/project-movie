@@ -1,0 +1,380 @@
+
+<!DOCTYPE html>
+
+<!--[if IE 8]><html class="ie8"><![endif]-->
+<!--[if IE 9]><html class="ie9"><![endif]-->
+<!--[if gt IE 9]><!--><html><!--<![endif]-->
+<head>
+    <title>梦想影城 - 梦里打尽好电影</title>
+
+    <link rel="dns-prefetch" href="//p0.meituan.net"  />
+    <link rel="dns-prefetch" href="//p1.meituan.net"  />
+    <link rel="dns-prefetch" href="//ms0.meituan.net" />
+    <link rel="dns-prefetch" href="//s0.meituan.net" />
+    <link rel="dns-prefetch" href="//ms1.meituan.net" />
+    <link rel="dns-prefetch" href="//analytics.meituan.com" />
+    <link rel="dns-prefetch" href="//report.meituan.com" />
+    <link rel="dns-prefetch" href="//frep.meituan.com" />
+    <!-- dropzone -->
+    <link rel="stylesheet" href="../static/user/css/dropzone.css"/>
+
+
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta http-equiv="cleartype" content="yes" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="renderer" content="webkit" />
+
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <script>"use strict";!function(){var i=0<arguments.length&&void 0!==arguments[0]?arguments[0]:"_Owl_",n=window;n[i]||(n[i]={isRunning:!1,isReady:!1,preTasks:[],dataSet:[],use:function(i,t){this.isReady&&n.Owl&&n.Owl[i](t),this.preTasks.push({api:i,data:[t]})},add:function(i){this.dataSet.push(i)},run:function(){var t=this;if(!this.isRunning){this.isRunning=!0;var i=n.onerror;n.onerror=function(){this.isReady||this.add({type:"jsError",data:arguments}),i&&i.apply(n,arguments)}.bind(this),(n.addEventListener||n.attachEvent)("error",function(i){t.isReady||t.add({type:"resError",data:[i]})},!0)}}},n[i].run())}();</script>
+
+    <link rel="stylesheet" href="//s0.meituan.net/bs/?f=myfe/mywww:/common.ef9ce11a.css"/>
+    <link rel="stylesheet" href="//s0.meituan.net/bs/?f=myfe/mywww:/profile-profile.13d06bf4.css"/>
+    <script crossorigin="anonymous" src="//s0.meituan.net/bs/?f=myfe/mywww:/stat.88d57c80.js"></script>
+    <script>if(window.devicePixelRatio >= 2) { document.write('<link rel="stylesheet" href="//s0.meituan.net/bs/?f=myfe/mywww:/image-2x.8ba7074d.css"/>') }</script>
+
+</head>
+<body>
+
+
+<div class="header">
+    <div class="header-inner">
+        <a href="/static/index.html" style="float: left;"><img src="../static/user/image/mengxiang.jpg" style="width: 133px;height: 80px"></a>
+        <!--<a href="/" class="logo" data-act="icon-click"></a>-->
+
+        <!--<div class="city-container" data-val="{currentcityid:20 }">
+            <div class="city-selected">
+                <div class="city-name">
+                    广州
+                    <span class="caret"></span>
+                </div>
+            </div>
+            <div class="city-list" data-val="{ localcityid: 20 }">
+                <div class="city-list-header">定位城市：<a class="js-geo-city">广州</a></div>
+
+            </div>
+        </div>-->
+
+
+        <div class="nav">
+            <ul class="navbar">
+                <li><a href="/static/index.html" data-act="home-click"  >首页</a></li>
+                <li><a href="/static/index.html" data-act="movies-click" >电影</a></li>
+                <li><a href="/static/profile.html"  >个人中心</a></li>
+            </ul>
+        </div>
+
+        <div class="user-info">
+            <div class="user-avatar has-login">
+                <img id="small_persionImg" src="https://img.meituan.net/maoyanuser/63957f10ae9679c95d4ba26ad1bd29c816882.png">
+                <span class="caret"></span>
+                <ul class="user-menu">
+                    <li class="text">
+                        <a href="/static/orders.html">我的订单</a>
+                    </li>
+                    <li class="text login-name" id="li_title"><a href="/static/profile.html">基本信息</a></li>
+                    <li id="userLogout" class="text"><a href="/static/index.html">退出登录</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!--<form action="#" target="_blank" class="search-form" data-actform="search-click">
+            <input name="kw" class="search" type="search" maxlength="32" placeholder="找影视剧、影人、影院" autocomplete="off">
+            <input class="submit" type="submit" value="">
+        </form>-->
+
+        <!--<div class="app-download">
+            <a href="#" target="_blank">
+                <span class="iphone-icon"></span>
+                <span class="apptext">APP下载</span>
+                <span class="caret"></span>
+            </a>
+        </div>-->
+
+    </div>
+</div>
+<div class="header-placeholder"></div>
+
+
+<div class="container" id="app" class="page-profile/profile" >
+    <div class="content">
+        <div class="main">
+            <div class="info-content clearfix">
+                <div class="user-profile-nav">
+                    <h1>个人中心</h1>
+                    <a href="/static/orders.html" class="orders active">我的订单</a>
+                    <a href="/static/profile.html" class="profile">基本信息</a>
+                </div>
+
+                <div id="order-box" class="orders-container">
+                    <div class="profile-title">我的订单</div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p >
+            如有抄袭，请联系客服
+        </p>
+    </div>
+
+</div>
+
+<script crossorigin="anonymous" src="//www.dpfile.com/app/owl/static/owl_1.7.11.js"></script>
+<!-- jquery -->
+<script src="../static/user/js/jquery.min.js"></script>
+<!-- dropzone -->
+<script src="../static/user/js/dropzone.js"></script>
+<script>
+
+    $(document).ready(function(){
+
+        $.ajax({
+            type: "GET",
+            url: "/api/user/getMyOrder",
+            contentType: "application/json; charset=utf-8",
+            cache: false,  //禁用缓存
+            dataType: "json",
+            success: function (result) {
+                //请求参数返回的全局响应，默认为200
+                if (result.code == '200') {
+                    //登陆成功返回的响应，成功为1
+                    if (result.data.success == 1) {
+                        $("#li_title").attr("title", result.data.list[0].username);
+                        if (result.data.list[0].image != null && result.data.list[0].image != "") {
+                            $("#small_persionImg").attr("src", result.data.list[0].image);
+                        }
+
+                        $.each(result.data.list,function (index,val) {
+
+                            var seat = new Array(val.seat1,val.seat2,val.seat3,val.seat4);
+
+                            for (var i = 0 ; i < 4 ; i ++) {
+                                if (seat[i] != null && seat[i] != ""){
+                                    var item = "<div class='order-box'>"+
+                                        "<div class='order-header'>"+
+                                        "<span class='order-date'>"+val.creatTime+"</span>"+
+                                        "<span class='order-id'>"+"订单号:"+val.orderId+"</span>"+
+                                        "<span class='del-order' onclick='deleteOrder("+val.orderId+")'></span>"+
+                                        "</div>"+
+                                        "<div class='order-body'>"+
+                                        "<div class='poster'>"+
+                                        "<img style='width: 66px;height: 91px' src='"+val.moviePhoto+"'>"+
+                                        "</div>"+
+                                        "<div class='order-content'>"+
+                                        "<div class='movie-name'>"+val.movieName+"</div>"+
+                                        "<div class='cinema-name'>"+val.cinemaName+"</div>"+
+                                        "<div class='hall-ticket'>"+
+                                        "<span>"+val.viewingHall+"</span>"+
+                                        "<span>"+Math.ceil(parseInt((seat[i]).substring(5))/ 17)+"排"+Math.ceil(parseInt((seat[i]).substring(5))%17)+"座</span>"+
+                                        "</div>"+
+                                        "<div class='cinema-name'>取票码："+val.ticketNumber+"</div>"+
+                                        "<div class='show-time'>"+val.movieDate+"</div>"+
+                                        "</div>"+
+                                        "<div class='order-price'>￥"+val.viewingPrice+"</div>"+
+                                        "<div class='order-status'>"+(val.isPay == 1 ? '已完成' : '未完成')+"</div>"+
+                                        "<div class='actions'>"+
+                                        "<div>"+
+                                        "<a href='#' class='order-detail'>查看详情</a>"+
+                                        "</div>"+
+                                        "</div>"+
+                                        "</div>"+
+                                        "</div>";
+                                    $("#order-box").append(item);
+                                }
+                            }
+
+                            /*if (val.seat1 != null && val.seat1 != ""){
+                                var item = "<div class='order-box'>"+
+                                    "<div class='order-header'>"+
+                                    "<span class='order-date'>"+val.creatTime+"</span>"+
+                                    "<span class='order-id'>"+"订单号:"+val.orderId+"</span>"+
+                                    "<span class='del-order' onclick='deleteOrder("+val.orderId+")'></span>"+
+                                    "</div>"+
+                                    "<div class='order-body'>"+
+                                    "<div class='poster'>"+
+                                    "<img style='width: 66px;height: 91px' src='"+val.moviePhoto+"'>"+
+                                    "</div>"+
+                                    "<div class='order-content'>"+
+                                    "<div class='movie-name'>"+val.movieName+"</div>"+
+                                    "<div class='cinema-name'>"+val.cinemaName+"</div>"+
+                                    "<div class='hall-ticket'>"+
+                                    "<span>"+val.viewingHall+"</span>"+
+                                    "<span>"+Math.ceil(parseInt((val.seat1).substring(5))/ 17)+"排"+Math.ceil(parseInt((val.seat1).substring(5))%17)+"座</span>"+
+                                    "</div>"+
+                                    "<div class='cinema-name'>取票码："+val.ticketNumber+"</div>"+
+                                    "<div class='show-time'>"+val.movieDate+"</div>"+
+                                    "</div>"+
+                                    "<div class='order-price'>￥"+val.viewingPrice+"</div>"+
+                                    "<div class='order-status'>"+(val.isPay == 1 ? '已完成' : '未完成')+"</div>"+
+                                    "<div class='actions'>"+
+                                    "<div>"+
+                                    "<a href='#' class='order-detail'>查看详情</a>"+
+                                    "</div>"+
+                                    "</div>"+
+                                    "</div>"+
+                                    "</div>";
+                                $("#order-box").append(item);
+                            }
+
+                            if (val.seat2 != null && val.seat2 != ""){
+                                var item2 = "<div class='order-box'>"+
+                                    "<div class='order-header'>"+
+                                    "<span class='order-date'>"+val.creatTime+"</span>"+
+                                    "<span class='order-id'>"+"订单号:"+val.orderId+"</span>"+
+                                    "<span class='del-order' onclick='deleteOrder("+val.orderId+")'></span>"+
+                                    "</div>"+
+                                    "<div class='order-body'>"+
+                                    "<div class='poster'>"+
+                                    "<img style='width: 66px;height: 91px' src='"+val.moviePhoto+"'>"+
+                                    "</div>"+
+                                    "<div class='order-content'>"+
+                                    "<div class='movie-name'>"+val.movieName+"</div>"+
+                                    "<div class='cinema-name'>"+val.cinemaName+"</div>"+
+                                    "<div class='hall-ticket'>"+
+                                    "<span>"+val.viewingHall+"</span>"+
+                                    "<span>"+Math.ceil(parseInt((val.seat2).substring(5))/ 17)+"排"+Math.ceil(parseInt((val.seat2).substring(5))%17)+"座</span>"+
+                                    "</div>"+
+                                    "<div class='cinema-name'>取票码："+val.ticketNumber+"</div>"+
+                                    "<div class='show-time'>"+val.movieDate+"</div>"+
+                                    "</div>"+
+                                    "<div class='order-price'>￥"+val.viewingPrice+"</div>"+
+                                    "<div class='order-status'>"+(val.isPay == 1 ? '已完成' : '未完成')+"</div>"+
+                                    "<div class='actions'>"+
+                                    "<div>"+
+                                    "<a href='#' class='order-detail'>查看详情</a>"+
+                                    "</div>"+
+                                    "</div>"+
+                                    "</div>"+
+                                    "</div>";
+                                $("#order-box").append(item2);
+                            }
+
+                            if (val.seat3 != null && val.seat3 != ""){
+                                var item3 = "<div class='order-box'>"+
+                                    "<div class='order-header'>"+
+                                    "<span class='order-date'>"+val.creatTime+"</span>"+
+                                    "<span class='order-id'>"+"订单号:"+val.orderId+"</span>"+
+                                    "<span class='del-order' onclick='deleteOrder("+val.orderId+")'></span>"+
+                                    "</div>"+
+                                    "<div class='order-body'>"+
+                                    "<div class='poster'>"+
+                                    "<img style='width: 66px;height: 91px' src='"+val.moviePhoto+"'>"+
+                                    "</div>"+
+                                    "<div class='order-content'>"+
+                                    "<div class='movie-name'>"+val.movieName+"</div>"+
+                                    "<div class='cinema-name'>"+val.cinemaName+"</div>"+
+                                    "<div class='hall-ticket'>"+
+                                    "<span>"+val.viewingHall+"</span>"+
+                                    "<span>"+Math.ceil(parseInt((val.seat3).substring(5))/ 17)+"排"+Math.ceil(parseInt((val.seat3).substring(5))%17)+"座</span>"+
+                                    "</div>"+
+                                    "<div class='cinema-name'>取票码："+val.ticketNumber+"</div>"+
+                                    "<div class='show-time'>"+val.movieDate+"</div>"+
+                                    "</div>"+
+                                    "<div class='order-price'>￥"+val.viewingPrice+"</div>"+
+                                    "<div class='order-status'>"+(val.isPay == 1 ? '已完成' : '未完成')+"</div>"+
+                                    "<div class='actions'>"+
+                                    "<div>"+
+                                    "<a href='#' class='order-detail'>查看详情</a>"+
+                                    "</div>"+
+                                    "</div>"+
+                                    "</div>"+
+                                    "</div>";
+                                $("#order-box").append(item3);
+                            }
+
+                            if (val.seat4 != null && val.seat4 != ""){
+                                var item4 = "<div class='order-box'>"+
+                                    "<div class='order-header'>"+
+                                    "<span class='order-date'>"+val.creatTime+"</span>"+
+                                    "<span class='order-id'>"+"订单号:"+val.orderId+"</span>"+
+                                    "<span class='del-order' onclick='deleteOrder("+val.orderId+")'></span>"+
+                                    "</div>"+
+                                    "<div class='order-body'>"+
+                                    "<div class='poster'>"+
+                                    "<img style='width: 66px;height: 91px' src='"+val.moviePhoto+"'>"+
+                                    "</div>"+
+                                    "<div class='order-content'>"+
+                                    "<div class='movie-name'>"+val.movieName+"</div>"+
+                                    "<div class='cinema-name'>"+val.cinemaName+"</div>"+
+                                    "<div class='hall-ticket'>"+
+                                    "<span>"+val.viewingHall+"</span>"+
+                                    "<span>"+Math.ceil(parseInt((val.seat4).substring(5))/ 17)+"排"+Math.ceil(parseInt((val.seat4).substring(5))%17)+"座</span>"+
+                                    "</div>"+
+                                    "<div class='cinema-name'>取票码："+val.ticketNumber+"</div>"+
+                                    "<div class='show-time'>"+val.movieDate+"</div>"+
+                                    "</div>"+
+                                    "<div class='order-price'>￥"+val.viewingPrice+"</div>"+
+                                    "<div class='order-status'>"+(val.isPay == 1 ? '已完成' : '未完成')+"</div>"+
+                                    "<div class='actions'>"+
+                                    "<div>"+
+                                    "<a href='#' class='order-detail'>查看详情</a>"+
+                                    "</div>"+
+                                    "</div>"+
+                                    "</div>"+
+                                    "</div>";
+                                $("#order-box").append(item4);
+                            }*/
+
+                        });
+                    }
+                    //登陆失败为0
+                    else if (result.data.success == 0) {
+                        alert("请先登录");
+                        window.location.href = "/static/login.html";
+                    }
+                } else {
+                    alert(result.msg);
+                }
+
+            },
+            error: function () {
+                alert("登陆异常")
+            }
+        });
+
+        $("#userLogout").click(function () {
+            $.get("/api/user/mUserLogOut");
+        });
+
+    });
+
+    function deleteOrder(result) {
+        var param={};
+       // var orderId = result;
+        param.orderId=result;
+        $.ajax({
+            url: "/delete",
+            type: "POST",
+            contentType: "application/json;charset=UTF-8",
+            cache: false,  //禁用缓存
+            data: JSON.stringify(param),  //传入组装的参数
+            dataType: "json",
+            success: function (result) {
+                if (result.success == 1) {
+                    alert("删除成功")
+                    window.location.reload();
+                } else {
+                    alert("删除失败");
+                }
+            }
+        });
+    }
+
+</script>
+<!--[if IE 8]><script crossorigin="anonymous" src="//s0.meituan.net/bs/?f=myfe/mywww:/es5-shim.bbad933f.js"></script><![endif]-->
+<!--[if IE 8]><script crossorigin="anonymous" src="//s0.meituan.net/bs/?f=myfe/mywww:/es5-sham.d6ea26f4.js"></script><![endif]-->
+<script crossorigin="anonymous" src="//s0.meituan.net/bs/?f=myfe/mywww:/common.98f4f69f.js"></script>
+<script crossorigin="anonymous" src="//s0.meituan.net/bs/?f=myfe/mywww:/profile-profile.c72043d3.js"></script>
+</body>
+</html>

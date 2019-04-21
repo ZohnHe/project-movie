@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.cat</groupId>
+    <artifactId>movie-project</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+    <modules>
+        <module>movie-common</module>
+        <module>movie-dao</module>
+        <module>movie-domain</module>
+        <module>movie-service</module>
+        <module>movie-vc</module>
+    </modules>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <!-- Spring版本 -->
+        <spring.version>4.2.5.RELEASE</spring.version>
+        <!-- HTML模板引擎 -->
+        <freemarker.version>2.3.20</freemarker.version>
+        <!-- 指定字符集 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <!-- 单元测试 -->
+        <junit.version>4.12</junit.version>
+        <!-- springMVC -->
+        <servlet-api.version>3.1.0</servlet-api.version>
+        <jackson-databind.version>2.9.0</jackson-databind.version>
+        <fastjson.version>1.2.17</fastjson.version>
+        <!-- 数据库操作 -->
+        <mybatis.version>3.2.8</mybatis.version>
+        <mybatis-spring.version>1.3.1</mybatis-spring.version>
+        <!-- 在线文档 -->
+        <springfox-swagger-ui.version>2.8.0</springfox-swagger-ui.version>
+        <!-- 数据库连接池 -->
+        <druid.version>1.1.6</druid.version>
+        <mysql-connector-java.version>5.1.46</mysql-connector-java.version>
+
+        <!-- 通用Mapper -->
+        <tk.mybatis.version>3.4.6</tk.mybatis.version>
+        <slf4j-api>1.7.25</slf4j-api>
+
+        <!-- 输入参加校验 -->
+        <hibernate-validator.version>5.1.3.Final</hibernate-validator.version>
+        <validation-api.version>1.1.0.Final</validation-api.version>
+        <classmate.version>1.1.0</classmate.version>
+
+        <!-- 文件上传与下载 -->
+        <commons-fileupload.version>1.3.3</commons-fileupload.version>
+        <commons-io.version>2.4</commons-io.version>
+
+        <!-- 数据库查询分页插件 -->
+        <pagehelper.version>4.1.4</pagehelper.version>
+        <!-- dozer属性复制 -->
+        <dozer.version>5.5.1</dozer.version>
+        <!--分页-->
+        <pagehelper.version>4.1.4</pagehelper.version>
+
+    </properties>
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+        <!-- 工具类包 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j-api}</version>
+        </dependency>
+
+        <!-- 通用Mapper -->
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper</artifactId>
+            <version>${tk.mybatis.version}</version>
+        </dependency>
+
+    </dependencies>
+</project>

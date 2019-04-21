@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movie.dao.mapping.TbIntroMapper" >
+  <resultMap id="BaseResultMap" type="com.movie.dao.pojo.TbIntro" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="movie_id" property="movieId" jdbcType="INTEGER" />
+    <result column="movie_name" property="movieName" jdbcType="VARCHAR" />
+    <result column="movie_Englist_name" property="movieEnglistName" jdbcType="VARCHAR" />
+    <result column="movie_classify1" property="movieClassify1" jdbcType="VARCHAR" />
+    <result column="movie_classify2" property="movieClassify2" jdbcType="VARCHAR" />
+    <result column="movie_classify3" property="movieClassify3" jdbcType="VARCHAR" />
+    <result column="movie_posters" property="moviePosters" jdbcType="VARCHAR" />
+    <result column="movie_star" property="movieStar" jdbcType="VARCHAR" />
+    <result column="movie_photo" property="moviePhoto" jdbcType="VARCHAR" />
+    <result column="movie_intro" property="movieIntro" jdbcType="VARCHAR" />
+    <result column="movie_picture1" property="moviePicture1" jdbcType="VARCHAR" />
+    <result column="movie_picture2" property="moviePicture2" jdbcType="VARCHAR" />
+    <result column="movie_picture3" property="moviePicture3" jdbcType="VARCHAR" />
+    <result column="movie_picture4" property="moviePicture4" jdbcType="VARCHAR" />
+    <result column="movie_picture5" property="moviePicture5" jdbcType="VARCHAR" />
+    <result column="movie_picture6" property="moviePicture6" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    movie_id, movie_name, movie_Englist_name, movie_classify1, movie_classify2, movie_classify3, 
+    movie_posters, movie_star, movie_photo, movie_intro, movie_picture1, movie_picture2, 
+    movie_picture3, movie_picture4, movie_picture5, movie_picture6, flag
+  </sql>
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.movie.dao.mapping.TbDetailsMapper" >
+  <resultMap id="BaseResultMap" type="com.movie.dao.pojo.TbDetails" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="movie_name" property="movieName" jdbcType="VARCHAR" />
+    <result column="movie_Englist_name" property="movieEnglistName" jdbcType="VARCHAR" />
+    <result column="movie_classify1" property="movieClassify1" jdbcType="VARCHAR" />
+    <result column="movie_classify2" property="movieClassify2" jdbcType="VARCHAR" />
+    <result column="movie_classify3" property="movieClassify3" jdbcType="VARCHAR" />
+    <result column="movie_feel" property="movieFeel" jdbcType="VARCHAR" />
+    <result column="movie_length" property="movieLength" jdbcType="VARCHAR" />
+    <result column="movie_date" property="movieDate" jdbcType="VARCHAR" />
+    <result column="movie_score" property="movieScore" jdbcType="VARCHAR" />
+    <result column="movie_intro" property="movieIntro" jdbcType="VARCHAR" />
+    <result column="movie_photo" property="moviePhoto" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, movie_name, movie_Englist_name, movie_classify1, movie_classify2, movie_classify3, 
+    movie_feel, movie_length, movie_date, movie_score, movie_intro, movie_photo, flag
+  </sql>
+</mapper>
